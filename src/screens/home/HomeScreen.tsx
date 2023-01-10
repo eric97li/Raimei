@@ -15,7 +15,7 @@ const HomeScreen = () => {
         />
         <GooglePlacesSearchInput
           type="origin"
-          placeholder="Where From?"
+          placeholder="Depart from?"
           styles={inputStyles}
         />
         <HomeOptions />

@@ -3,6 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import HomeScreen from "../screens/home/HomeScreen";
 import MapScreen from "../screens/map/MapScreen";
+import RidersScreen from "../screens/riders/RidersScreen";
+import PaymentScreen from "../screens/payment/PaymentScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import GPSScreen from "../screens/gps/GPSScreen";
 import { RootStackParamList } from "../types/navigation";
 
 interface NavigationProps {}
@@ -24,6 +28,10 @@ const RootNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="Riders" component={RidersScreen} />
+      <Stack.Screen name="Payment" component={PaymentScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="GPS" component={GPSScreen} />
     </Stack.Navigator>
   );
 };

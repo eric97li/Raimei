@@ -8,11 +8,11 @@ import MapCardFavourites from "./MapCardFavourites";
 const MapCard = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Good Morning</Text>
+      <Text style={styles.title}>Destination</Text>
       <View style={styles.details}>
         <GooglePlacesSearchInput
           type="destination"
-          placeholder="Where To?"
+          placeholder="Arrive at?"
           styles={inputStyles}
         />
         <MapCardFavourites />

@@ -9,17 +9,6 @@ const MapCardButtons = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: "black" }]}
-        onPress={() => navigation.navigate("MapRide")}
-      >
-        <Icon name="car" type="font-awesome" color="white" size={16} />
-        <Text style={{ color: "white", textAlign: "center" }}>Rides</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Icon name="fast-food-outline" type="ionicon" color="black" size={16} />
-        <Text style={{ color: "black", textAlign: "center" }}>Eats</Text>
-      </TouchableOpacity>
     </View>
   );
 };

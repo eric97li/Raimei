@@ -3,6 +3,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 export type RootStackParamList = {
   Home: undefined;
   Map: undefined;
+  Riders: undefined;
+  Payment: undefined;
+  Profile: undefined;
+  GPS: undefined;
 };
 
 export type MapStackParamList = {

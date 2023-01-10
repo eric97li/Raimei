@@ -51,7 +51,7 @@ const Map = () => {
             destination={destination.description}
             apikey={GOOGLE_MAPS_API_KEY}
             strokeWidth={3}
-            strokeColor="black"
+            strokeColor="purple"
             lineDashPattern={[0]}
           />
         </>
