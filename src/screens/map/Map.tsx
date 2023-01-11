@@ -1,6 +1,6 @@
 import { GOOGLE_MAPS_API_KEY } from "@env";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import useResizeMap from "../../hooks/useResizeMap";
@@ -9,6 +9,18 @@ import { useStore } from "../../stores/store";
 const Map = () => {
   const { origin, destination } = useStore().mapStore;
   const [mapRef] = useResizeMap(origin, destination);
+
+  useEffect(() => {
+    if (origin && destination) {
+      mapRef.current?.fitToCoordinates([{latitude: origin.location.lat, longitude: origin.location.lng}, {latitude: destination.location.lat, longitude: destination.location.lng,}],
+        {edgePadding: {
+          top: 60,
+          right: 60,
+          bottom: 60,
+          left: 60,
+        }})
+    }
+  }, [origin, destination, mapRef]);
 
   if (!origin) {
     return null;
