@@ -28,11 +28,12 @@ export default observer(MapRideButton);
 const styles = StyleSheet.create({
   container: {
     marginTop: "auto",
-    borderTopWidth: 1,
-    borderColor: "#E5E7EB",
+    borderTopWidth: 6,
+    borderBottomWidth: 6,
+    borderColor: "black",
   },
   button: {
-    backgroundColor: "black",
+    backgroundColor: "#4f284b",
     paddingVertical: 12,
   },
   title: {

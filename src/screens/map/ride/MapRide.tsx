@@ -19,7 +19,7 @@ export default MapRide;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#ffb7c5",
     flexGrow: 1,
   },
 });

@@ -46,7 +46,7 @@ export default observer(MapScreen);
 
 const styles = StyleSheet.create({
   iconButton: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#ffb7c5",
     position: "absolute",
     top: 28,
     left: 8,

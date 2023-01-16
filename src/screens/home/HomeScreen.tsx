@@ -11,7 +11,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <Image
           style={styles.image}
-          source={require("../../../assets/images/logo.svg")}
+          source={require("../../../assets/images/sakura-flower.jpg")}
         />
         <GooglePlacesSearchInput
           type="origin"
@@ -29,7 +29,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: "white",
+    backgroundColor: "#ffb7c5",
     height: "100%",
   },
   container: {

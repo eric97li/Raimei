@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 16,
     borderRadius: 9999,
-    backgroundColor: "rgba(209, 213, 219, 1)",
+    backgroundColor: "#4f284b",
     padding: 12,
   },
   location: {

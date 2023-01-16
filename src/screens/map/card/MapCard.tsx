@@ -26,7 +26,7 @@ export default MapCard;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#ffb7c5",
     flex: 1,
   },
   title: {
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
 
 const inputStyles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#ffb7c5",
     paddingTop: 20,
     flex: 0,
   },
   textInput: {
-    backgroundColor: "#DDDDDF",
+    backgroundColor: "white",
     borderRadius: 0,
     fontSize: 18,
   },

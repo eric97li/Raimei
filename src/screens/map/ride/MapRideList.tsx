@@ -25,7 +25,7 @@ const MapRideList = () => {
           style={[
             styles.item,
             title === selectedRide?.title && {
-              backgroundColor: "rgba(229, 231, 235, 1)",
+              backgroundColor: "#BDB5D5",
             },
           ]}
           onPress={() => setSelectedRide(item)}
@@ -33,7 +33,7 @@ const MapRideList = () => {
           <Image style={styles.image} source={{ uri: image }} />
           <View style={{ marginLeft: -24 }}>
             <Text style={styles.title}>{title}</Text>
-            <Text>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
+            <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
           </View>
           <Text style={styles.price}>
             {calcRidePrice(travelTimeInfo?.duration?.value || 0, multiplier)}
@@ -62,9 +62,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 20,
     fontWeight: "bold",
+    color: "black"
   },
   price: {
     fontSize: 20,
     lineHeight: 20,
+    color: "black"
   },
 });

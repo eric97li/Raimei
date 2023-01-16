@@ -1,16 +1,16 @@
 {
   "expo": {
     "userInterfaceStyle": "automatic",
-    "name": "Uber Clone",
-    "description": "Uber Clone created with React Native",
-    "slug": "uber-clone",
+    "name": "Raimei",
+    "description": "Rideshare App by Raimei Technologies",
+    "slug": "Raimei",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/sakura-flower.jpg",
     "splash": {
-      "image": "./assets/images/adaptive-icon.png",
+      "image": "./assets/images/sakura-flower.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#ffb7c5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +21,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#000000"
+        "foregroundImage": "./assets/images/sakura-flower.jpg",
+        "backgroundColor": "#ffb7c5"
       }
     }
   }

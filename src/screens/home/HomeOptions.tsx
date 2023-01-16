@@ -28,9 +28,9 @@ const NavOptions = () => {
         <TouchableOpacity
           style={styles.item}
           onPress={() => navigation.navigate(screen)}
-          disabled={!origin}
+          disabled={!origin && title != "Drive"}
         >
-          <View style={!origin && { opacity: 0.2 }}>
+          <View style={(!origin && title != "Drive") && { opacity: 0.2 }}>
             <Image source={{ uri: image }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
             <Icon
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     padding: 8,
-    backgroundColor: "black",
+    backgroundColor: "#4f284b",
     borderRadius: 9999,
     width: 40,
     marginTop: 16,
