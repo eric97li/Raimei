@@ -1,6 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import SignInScreen from "../screens/signIn/SignInScreen";
+import SignUpScreen from "../screens/signUp/SignUpScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import MapScreen from "../screens/map/MapScreen";
 import RidersScreen from "../screens/riders/RidersScreen";
@@ -26,6 +28,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen options={{cardStyle: {backgroundColor:"#ffb7c5"}}} name="SignIn" component={SignInScreen} />
+      <Stack.Screen options={{cardStyle: {backgroundColor:"#ffb7c5"}}} name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
       <Stack.Screen name="Riders" component={RidersScreen} />
