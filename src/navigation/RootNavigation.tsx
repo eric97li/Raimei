@@ -9,6 +9,7 @@ import RidersScreen from "../screens/riders/RidersScreen";
 import PaymentScreen from "../screens/payment/PaymentScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import GPSScreen from "../screens/gps/GPSScreen";
+import AwaitDriverScreen from "../screens/awaitDriver/AwaitDriverScreen";
 import { RootStackParamList } from "../types/navigation";
 
 interface NavigationProps {}
@@ -31,11 +32,12 @@ const RootNavigator = () => {
       <Stack.Screen options={{cardStyle: {backgroundColor:"#ffb7c5"}}} name="SignIn" component={SignInScreen} />
       <Stack.Screen options={{cardStyle: {backgroundColor:"#ffb7c5"}}} name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
       <Stack.Screen name="Riders" component={RidersScreen} />
-      <Stack.Screen name="Payment" component={PaymentScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="AwaitDriver" component={AwaitDriverScreen} />
       <Stack.Screen name="GPS" component={GPSScreen} />
+      <Stack.Screen name="Payment" component={PaymentScreen} />
     </Stack.Navigator>
   );
 };

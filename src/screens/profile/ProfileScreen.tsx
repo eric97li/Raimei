@@ -1,12 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
+import { useStore } from "../../stores/store";
 
 const ProfileScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
+  const { username } = useStore().commonStore;
+  // const { password } = useStore().commonStore;
 
   return (
     <View>
@@ -16,6 +19,9 @@ const ProfileScreen = () => {
       >
         <Icon name="menu" />
       </TouchableOpacity>
+      <View>
+      <Text style={{color: "black", fontSize: 50, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>{username}</Text>
+      </View>
     </View>
   );
 };
@@ -24,7 +30,7 @@ export default observer(ProfileScreen);
 
 const styles = StyleSheet.create({
   iconButton: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#BDB5D5",
     position: "absolute",
     top: 28,
     left: 8,
@@ -39,8 +45,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-  half: {
-    height: "50%",
   },
 });

@@ -1,25 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View, TextInput, Text} from "react-native";
 import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
+import { useStore } from "../../stores/store";
 
 const SignInScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const [username, setUsername] = useState({
-    username:"",
-  });
-  const [password, setPassword] = useState({
-    password: ""
-  });
+  const { username, setUsername } = useStore().commonStore;
+  const { password, setPassword } = useStore().commonStore;
 
   const validate_field=(username: any, password: any)=>{
 
-    if(username.username == "") {
+    if(username == "" || username == null) {
       alert("Username or password is incorrect!")
       return false
-    } else if(password.password == "") {
+    } else if(password == "" || password == null) {
       alert("Username or password is incorrect!")
       return false
     }
@@ -42,16 +39,16 @@ const SignInScreen = () => {
             for(let i = 1; i < response.length; i++) {
               // console.log(response[i].username)
               // console.log(response[i].password)
-              if((response[i].username == username.username) && (response[i].password == password.password)) {
+              if((response[i].username == username) && (response[i].password == password)) {
                 navigation.navigate("Home");
                 break;
               }
               //incorrect password
-              else if((response[i].username == username.username) && (response[i].password != password.password)) {
+              else if((response[i].username == username) && (response[i].password != password)) {
                 alert("Incorrect password")
               }
               //if by the end of the check no username matches then username doesn't exist
-              if((response[i].username != username.username) && (i==response.length-1)) {
+              if((response[i].username != username) && (i==response.length-1)) {
                 alert("Username entered does not match any account")
               }
             }
@@ -71,11 +68,11 @@ const SignInScreen = () => {
         />
         <Text style={{color: "black", fontSize: 50, marginBottom: 40}}>Raimei</Text>
         <TextInput placeholder={"Username"}
-        onChangeText={(value)=> setUsername({username: value})}
+        onChangeText={(value)=> setUsername(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1}}
         />
         <TextInput placeholder={"Password"} 
-        onChangeText={(value)=> setPassword({password: value})}
+        onChangeText={(value)=> setPassword(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
             <View style={{marginTop: "10%", width: "80%"}}>

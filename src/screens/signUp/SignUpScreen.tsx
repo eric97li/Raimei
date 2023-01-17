@@ -4,26 +4,23 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, TextInput, Text, Image} from "react-native";
 import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
+import { useStore } from "../../stores/store";
 
 const SignUpScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const [username, setUsername] = useState({
-    username:"",
-  });
-  const [password, setPassword] = useState({
-    password: ""
-  });
+  const { username, setUsername } = useStore().commonStore;
+  const { password, setPassword } = useStore().commonStore;
 
   const signup_field=(username: any, password: any)=>{
     // console.log(username.username);
     // console.log(password.password);
-    if(username.username == "") {
+    if(username == "" || username == null) {
         alert("Username or password missing!")
         return false
-      } else if(password.password == "") {
+      } else if(password == "" || password == null) {
         alert("Username or password missing!")
         return false
-      } else if(password.password.length < 5) {
+      } else if(password.length < 5) {
         alert("Field password must be 5 characters or longer.")
         return false
       }
@@ -44,7 +41,7 @@ const SignUpScreen = () => {
         }
         //check array of usernames
         //username is already taken
-        if(usernameList.includes(username.username)) {
+        if(usernameList.includes(username)) {
           alert("Username is already taken")
         }
         //username is unique, create account
@@ -55,8 +52,8 @@ const SignUpScreen = () => {
             "name": "user",
             "email": "@gmail.com",
             "phone": "(123)-456-7890",
-            "username": username.username,
-            "password": password.password,
+            "username": username,
+            "password": password,
             "driverSubscriptionStatus": "active-inactive",
             "info": "car-nums",
             "rating": 0,
@@ -100,11 +97,11 @@ const SignUpScreen = () => {
         />
         <Text style={{color: "black", fontSize: 50, marginBottom: 40}}>Raimei</Text>
         <TextInput placeholder={"Username"}
-        onChangeText={(value)=> setUsername({username: value})}
+        onChangeText={(value)=> setUsername(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1}}
         />
         <TextInput placeholder={"Password"} 
-        onChangeText={(value)=> setPassword({password: value})}
+        onChangeText={(value)=> setPassword(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
             <View style={{marginTop: "10%", width: "80%"}}>

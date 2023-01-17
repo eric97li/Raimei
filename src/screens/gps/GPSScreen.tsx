@@ -24,7 +24,7 @@ export default observer(GPSScreen);
 
 const styles = StyleSheet.create({
   iconButton: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#BDB5D5",
     position: "absolute",
     top: 28,
     left: 8,

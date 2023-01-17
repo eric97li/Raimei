@@ -12,7 +12,7 @@ const MapRideButton = () => {
         style={[
           styles.button,
           !selectedRide && {
-            backgroundColor: "#D1D5DB",
+            backgroundColor: "#BDB5D5",
           },
         ]}
         disabled={!selectedRide}

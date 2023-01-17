@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Payment: undefined;
   Profile: undefined;
   GPS: undefined;
+  AwaitDriver: undefined;
 };
 
 export type MapStackParamList = {
