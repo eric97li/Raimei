@@ -8,7 +8,8 @@ import { useStore } from "../../stores/store";
 
 const ProfileScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const { username } = useStore().commonStore;
+  const { name } = useStore().commonStore;
+  // const { username } = useStore().commonStore;
   // const { password } = useStore().commonStore;
 
   return (
@@ -20,7 +21,7 @@ const ProfileScreen = () => {
         <Icon name="menu" />
       </TouchableOpacity>
       <View>
-      <Text style={{color: "black", fontSize: 50, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>{username}</Text>
+      <Text style={{color: "black", fontSize: 50, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>{name}</Text>
       </View>
     </View>
   );

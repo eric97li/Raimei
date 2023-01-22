@@ -8,28 +8,32 @@ import { useStore } from "../../stores/store";
 
 const SignUpScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
+  const { name, setName } = useStore().commonStore;
   const { username, setUsername } = useStore().commonStore;
   const { password, setPassword } = useStore().commonStore;
   const { email, setEmail } = useStore().commonStore;
   const { phone, setPhone } = useStore().commonStore;
 
-  const signup_field=(username: any, password: any, email: any, phone: any)=>{
+  const signup_field=(name: any, username: any, password: any, email: any, phone: any)=>{
     // console.log(username.username);
     // console.log(password.password);
     if(username == "" || username == null) {
-        alert("Username or password missing!")
+        alert("Please fill in all fields")
         return false
       } else if(password == "" || password == null) {
-        alert("Username or password missing!")
+        alert("Please fill in all fields")
         return false
       } else if(password.length < 5) {
         alert("Field password must be 5 characters or longer.")
         return false
+      } else if(name == "" || name == null) {
+        alert("Please fill in all fields")
+        return false
       } else if(email == "" || email == null) {
-        alert("Email missing or Phone")
+        alert("Please fill in all fields")
         return false
       } else if(phone == "" || phone == null) {
-        alert("Phone missing")
+        alert("Please fill in all fields")
         return false
       }
 
@@ -78,7 +82,7 @@ const SignUpScreen = () => {
                     "database": "RaimeiDB",
                     "dataSource": "Cluster0",
                     "document": {
-                      "name": "",
+                      "name": name,
                       "email": email,
                       "phone": phone,
                       "username": username,
@@ -148,10 +152,14 @@ const SignUpScreen = () => {
           style={styles.image}
           source={require("../../../assets/images/sakura-flower.jpg")}
         />
-        <Text style={{color: "black", fontSize: 50, marginBottom: 40}}>Raimei</Text>
+        <Text style={{color: "black", fontSize: 50, marginBottom: 30}}>Raimei</Text>
+        <TextInput placeholder={"Name"}
+        onChangeText={(value)=> setName(value)}
+        style={{ height: 42, width: "80%", borderBottomWidth: 1}}
+        />
         <TextInput placeholder={"Username"}
         onChangeText={(value)=> setUsername(value)}
-        style={{ height: 42, width: "80%", borderBottomWidth: 1}}
+        style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
         <TextInput placeholder={"Password"} 
         onChangeText={(value)=> setPassword(value)}
@@ -170,7 +178,7 @@ const SignUpScreen = () => {
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
               backgroundColor: "#4f284b", alignSelf: "center", textAlign : "center"
               }}
-              onPress={()=>signup_field(username, password, email, phone)}
+              onPress={()=>signup_field(name, username, password, email, phone)}
               >
                 <Text style={{color: "white"}}> Sign Up </Text>
                 </TouchableOpacity>

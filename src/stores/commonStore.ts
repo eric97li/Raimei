@@ -3,6 +3,7 @@ import { MapRideItem } from "../types/map";
 
 class CommonStore {
   selectedRide: MapRideItem | null = null;
+  name: string | null = null;
   username: string | null = null;
   password: string | null = null;
   email: string | null = null;
@@ -16,6 +17,10 @@ class CommonStore {
   setSelectedRide = (ride: MapRideItem) => {
     this.selectedRide = ride;
   };
+
+  setName = (name: string) => {
+    this.name = name;
+  }
 
   setUsername = (username: string) => {
     this.username = username;
