@@ -10,8 +10,10 @@ const SignUpScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const { username, setUsername } = useStore().commonStore;
   const { password, setPassword } = useStore().commonStore;
+  const { email, setEmail } = useStore().commonStore;
+  const { phone, setPhone } = useStore().commonStore;
 
-  const signup_field=(username: any, password: any)=>{
+  const signup_field=(username: any, password: any, email: any, phone: any)=>{
     // console.log(username.username);
     // console.log(password.password);
     if(username == "" || username == null) {
@@ -23,65 +25,116 @@ const SignUpScreen = () => {
       } else if(password.length < 5) {
         alert("Field password must be 5 characters or longer.")
         return false
+      } else if(email == "" || email == null) {
+        alert("Email missing or Phone")
+        return false
+      } else if(phone == "" || phone == null) {
+        alert("Phone missing")
+        return false
       }
 
-      //check that the username is unique
-      return fetch('https://raimei.azurewebsites.net/users', {
-        method: 'GET', 
-      })
-      .then(response => response.json())
-      .then(response => {
-        // console.log(response[0].name)
+      //Get the documents "find" to check for all data
+      let axios = require('axios');
+      let data = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0"
+      });
 
-        //users begin at id 1
-        //get list of usernames
-        let usernameList = [];
-        for(let i = 1; i < response.length; i++) {
-          usernameList.push(response[i].username)
-        }
-        //check array of usernames
-        //username is already taken
-        if(usernameList.includes(username)) {
-          alert("Username is already taken")
-        }
-        //username is unique, create account
-        else {
+      let config = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/find',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data
+      };
 
-          const data = {
-            "id": 0,
-            "name": "user",
-            "email": "@gmail.com",
-            "phone": "(123)-456-7890",
-            "username": username,
-            "password": password,
-            "driverSubscriptionStatus": "active-inactive",
-            "info": "car-nums",
-            "rating": 0,
-            "rides": [],
-            "reserved": [],
-            "time": "date-time",
-            "history": [],
-            "userPrice": 0
-          };
-    
-          return fetch('https://raimei.azurewebsites.net/users', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+      axios(config)
+          .then(function (response) {
+            // console.log("-------------------------")
+              // console.log(JSON.stringify(response.data));
+              // console.log(response.data.documents[i].username);
+              // console.log(response.data.documents.length);
+        
+              //users begin at id 1
+              //get list of usernames
+              let usernameList = [];
+              for(let i = 1; i < response.data.documents.length; i++) {
+                usernameList.push(response.data.documents[i].username)
+              }
+              //check array of usernames
+              //username is already taken
+              if(usernameList.includes(username)) {
+                alert("Username is already taken")
+              }
+               //username is unique, create account
+              else {
+                let axios = require('axios');
+                let data = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "document": {
+                      "name": "",
+                      "email": email,
+                      "phone": phone,
+                      "username": username,
+                      "password": password,
+                      "info": "car-nums",
+                      "pickUpLocation": "",
+                      "dropOffLocation": "",
+                      "driverLocation": "",
+                      "reserved": [],
+                      "estPrice": 0,
+                      "userPrice": 0,
+                      "offerPrice": 0,
+                      "endPrice": 0,
+                      "dropOffTravelTime": "",
+                      "pickUpArrivalTime": "",
+                      "pickUpTime": "",
+                      "driverHistory": [],
+                      "rideHistory": [],
+                      "driverRating": 0,
+                      "riderRating": 0
+                    }
+                  });
+
+                let config = {
+                      method: 'post',
+                      url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/insertOne',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Request-Headers': '*',
+                        'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                      },
+                      data: data
+                  };
+
+                axios(config)
+                  .then(function (response) {
+                      // console.log(JSON.stringify(response.data));
+                      if(response.status == 201) {
+                        alert("Profile created");
+                        navigation.navigate("Home");
+                      }
+                      else {
+                        alert("Username is already taken!")
+                      }
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  });
+              }
+       
           })
-          .then(response => {
-            if(response.status == 201) {
-              alert("Profile created");
-              navigation.navigate("Home");
-            }
-            //error
-            else {
-              alert("username already taken!")
-            }
-          })
+          .catch(function (error) {
+              console.log(error);
+          });
 
-        }
-      })
+
     
   }
   
@@ -104,12 +157,20 @@ const SignUpScreen = () => {
         onChangeText={(value)=> setPassword(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
+        <TextInput placeholder={"Email"} 
+        onChangeText={(value)=> setEmail(value)}
+        style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
+        />
+        <TextInput placeholder={"Phone"} 
+        onChangeText={(value)=> setPhone(value)}
+        style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
+        />
             <View style={{marginTop: "10%", width: "80%"}}>
                 <TouchableOpacity style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
               backgroundColor: "#4f284b", alignSelf: "center", textAlign : "center"
               }}
-              onPress={()=>signup_field(username, password)}
+              onPress={()=>signup_field(username, password, email, phone)}
               >
                 <Text style={{color: "white"}}> Sign Up </Text>
                 </TouchableOpacity>

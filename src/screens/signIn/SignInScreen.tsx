@@ -21,39 +21,58 @@ const SignInScreen = () => {
       return false
     }
     
-    //check for the credentials entered by user with the api and retrieve account of user
-          return fetch('https://raimei.azurewebsites.net/users', {
-            method: 'GET', 
-          })
-          .then(response => response.json())
-          .then(response => {
-            // console.log(response[0].name)
+    let axios = require('axios');
+      let data = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0"
+      });
+
+      let config = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/find',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data
+      };
+
+      axios(config)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data));
+              // console.log(response.data.documents[i].username);
+              // console.log(response.data.documents.length);
 
             //only the initial api placeholder parameters index 0
-            if(response.length == 1) {
+            if(response.data.documents.length == 1) {
               alert("Username entered does not match any account")
             }
-    
+
             //users begin at id 1
 
-            for(let i = 1; i < response.length; i++) {
+            for(let i = 1; i < response.data.documents.length; i++) {
               // console.log(response[i].username)
               // console.log(response[i].password)
-              if((response[i].username == username) && (response[i].password == password)) {
+              if((response.data.documents[i].username == username) && (response.data.documents[i].password == password)) {
                 navigation.navigate("Home");
                 break;
               }
               //incorrect password
-              else if((response[i].username == username) && (response[i].password != password)) {
+              else if((response.data.documents[i].username == username) && (response.data.documents[i].password != password)) {
                 alert("Incorrect password")
               }
               //if by the end of the check no username matches then username doesn't exist
-              if((response[i].username != username) && (i==response.length-1)) {
+              if((response.data.documents[i].username != username) && (i==response.data.documents.length-1)) {
                 alert("Username entered does not match any account")
               }
             }
- 
+
           })
+          .catch(function (error) {
+              console.log(error);
+          });
     
   }
 

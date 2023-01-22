@@ -5,6 +5,8 @@ class CommonStore {
   selectedRide: MapRideItem | null = null;
   username: string | null = null;
   password: string | null = null;
+  email: string | null = null;
+  phone: string | null = null;
 
 
   constructor() {
@@ -22,6 +24,14 @@ class CommonStore {
   setPassword = (password: string) => {
     this.password = password;
   };
+
+  setEmail = (email: string) => {
+    this.email = email;
+  }
+
+  setPhone = (phone: string) => {
+    this.phone = phone;
+  }
 
 }
 
