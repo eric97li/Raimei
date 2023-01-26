@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/sakura-flower.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffb7c5"
+      "backgroundColor": "#4f284b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/sakura-flower.png",
-        "backgroundColor": "#ffb7c5"
+        "backgroundColor": "#4f284b"
       }
     }
   }
