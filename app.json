@@ -6,9 +6,9 @@
     "slug": "Raimei",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/sakura-flower.jpg",
+    "icon": "./assets/images/sakura-flower.png",
     "splash": {
-      "image": "./assets/images/sakura-flower.jpg",
+      "image": "./assets/images/sakura-flower.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffb7c5"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/sakura-flower.jpg",
+        "foregroundImage": "./assets/images/sakura-flower.png",
         "backgroundColor": "#ffb7c5"
       }
     }

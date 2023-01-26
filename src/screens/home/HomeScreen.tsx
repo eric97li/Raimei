@@ -24,7 +24,7 @@ const HomeScreen = () => {
       </TouchableOpacity>
         <Image
           style={styles.image}
-          source={require("../../../assets/images/sakura-flower.jpg")}
+          source={require("../../../assets/images/sakura-flower.png")}
         />
         <GooglePlacesSearchInput
           type="origin"

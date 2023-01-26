@@ -150,7 +150,7 @@ const SignUpScreen = () => {
       }}>
       <Image
           style={styles.image}
-          source={require("../../../assets/images/sakura-flower.jpg")}
+          source={require("../../../assets/images/sakura-flower.png")}
         />
         <Text style={{color: "black", fontSize: 50, marginBottom: 30}}>Raimei</Text>
         <TextInput placeholder={"Name"}
