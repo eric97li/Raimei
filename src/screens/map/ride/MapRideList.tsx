@@ -30,7 +30,6 @@ const MapRideList = () => {
           ]}
           onPress={() => setSelectedRide(item)}
         >
-          <Image style={styles.image} source={{ uri: image }} />
           <View style={{ marginLeft: -24 }}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
@@ -52,10 +51,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 40,
+    paddingTop: 27,
+    paddingBottom: 27,
   },
   image: {
-    width: 100,
-    height: 100,
+    // width: 100,
+    // height: 100,
     resizeMode: "contain",
   },
   title: {

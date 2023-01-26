@@ -1,17 +1,14 @@
 [
   {
     "title": "Raimei X",
-    "multiplier": 1,
-    "image": ""
+    "multiplier": 1
   },
   {
     "title": "Raimei XL",
-    "multiplier": 1.2,
-    "image": ""
+    "multiplier": 1.2
   },
   {
     "title": "Raimei LUX",
-    "multiplier": 1.75,
-    "image": ""
+    "multiplier": 1.75
   }
 ]

@@ -1,12 +1,10 @@
 [
   {
     "title": "Ride",
-    "image": "",
     "screen": "Map"
   },
   {
     "title": "Drive",
-    "image": "",
     "screen": "Riders"
   }
 ]

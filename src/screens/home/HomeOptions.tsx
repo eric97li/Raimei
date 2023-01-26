@@ -31,7 +31,6 @@ const NavOptions = () => {
           disabled={!origin && title != "Drive"}
         >
           <View style={(!origin && title != "Drive") && { opacity: 0.2 }}>
-            <Image source={{ uri: image }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
             <Icon
               style={styles.icon}
@@ -50,17 +49,17 @@ export default observer(NavOptions);
 
 const styles = StyleSheet.create({
   item: {
-    paddingLeft: 24,
+    // paddingLeft: 24,
     paddingRight: 8,
     paddingBottom: 32,
     paddingTop: 16,
-    backgroundColor: "#E5E7EB",
+    backgroundColor: "#BDB5D5",
     margin: 8,
-    width: 160,
+    width: 180
   },
   image: {
-    width: 120,
-    height: 120,
+    // width: 120,
+    // height: 120,
     resizeMode: "contain",
   },
   title: {
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 28,
     fontWeight: "bold",
+    alignSelf: "center"
   },
   icon: {
     padding: 8,
@@ -75,5 +75,6 @@ const styles = StyleSheet.create({
     borderRadius: 9999,
     width: 40,
     marginTop: 16,
+    alignSelf: "center"
   },
 });
