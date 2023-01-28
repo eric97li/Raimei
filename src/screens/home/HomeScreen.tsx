@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import MapCardFavourites from "../map/card/MapCardFavourites";
 import GooglePlacesSearchInput from "../../components/search/GooglePlacesSearchInput";
 import HomeOptions from "./HomeOptions";
 import { useNavigation } from "@react-navigation/native";
@@ -32,7 +31,6 @@ const HomeScreen = () => {
           styles={inputStyles}
         />
         <HomeOptions />
-        <MapCardFavourites />
       </View>
     </SafeAreaView>
   );

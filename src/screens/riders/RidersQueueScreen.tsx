@@ -5,7 +5,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
 
-const RidersScreen = () => {
+const RidersQueueScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
 
   return (
@@ -20,7 +20,7 @@ const RidersScreen = () => {
   );
 };
 
-export default observer(RidersScreen);
+export default observer(RidersQueueScreen);
 
 const styles = StyleSheet.create({
   iconButton: {

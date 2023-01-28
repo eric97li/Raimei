@@ -5,7 +5,8 @@ export type RootStackParamList = {
   SignUp: undefined;
   Home: undefined;
   Map: undefined;
-  Riders: undefined;
+  DriverOffers: undefined;
+  RidersQueue: undefined;
   Payment: undefined;
   Profile: undefined;
   GPS: undefined;

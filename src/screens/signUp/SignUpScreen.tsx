@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity, View, TextInput, Text, Image} from "react-native";
-import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
 import { useStore } from "../../stores/store";
 
@@ -14,7 +13,7 @@ const SignUpScreen = () => {
   const { email, setEmail } = useStore().commonStore;
   const { phone, setPhone } = useStore().commonStore;
 
-  const signup_field=(name: any, username: any, password: any, email: any, phone: any)=>{
+  const signup_field=(name: string, username: string, password: string, email: string, phone: string)=>{
     // console.log(username.username);
     // console.log(password.password);
     if(username == "" || username == null) {
@@ -76,6 +75,12 @@ const SignUpScreen = () => {
               }
                //username is unique, create account
               else {
+                name = name.trim();
+                email = email.trim();
+                phone = phone.trim();
+                username = username.trim();
+                password = password.trim();
+
                 let axios = require('axios');
                 let data = JSON.stringify({
                     "collection": "users",
@@ -91,6 +96,8 @@ const SignUpScreen = () => {
                       "pickUpLocation": "",
                       "dropOffLocation": "",
                       "driverLocation": "",
+                      "favouriteOrigins": [],
+                      "favouriteDestinations": [],
                       "reserved": [],
                       "estPrice": 0,
                       "userPrice": 0,
@@ -99,6 +106,7 @@ const SignUpScreen = () => {
                       "dropOffTravelTime": "",
                       "pickUpArrivalTime": "",
                       "pickUpTime": "",
+                      "dropOffTime": "",
                       "driverHistory": [],
                       "rideHistory": [],
                       "driverRating": 0,
@@ -186,7 +194,7 @@ const SignUpScreen = () => {
             <View style={{marginTop: "10%", width: "80%"}}>
                 <TouchableOpacity style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "white", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#BDB5D5", alignSelf: "center", textAlign : "center"
               }}
               onPress={()=>navigation.navigate("SignIn")}
               >

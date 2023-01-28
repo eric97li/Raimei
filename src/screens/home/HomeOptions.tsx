@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -24,7 +23,7 @@ const NavOptions = () => {
       horizontal
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item) => item.title}
-      renderItem={({ item: { image, title, screen } }) => (
+      renderItem={({ item: { title, screen } }) => (
         <TouchableOpacity
           style={styles.item}
           onPress={() => navigation.navigate(screen)}

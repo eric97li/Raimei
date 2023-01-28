@@ -8,6 +8,7 @@ class CommonStore {
   password: string | null = null;
   email: string | null = null;
   phone: string | null = null;
+  userPrice: string | null = null;
 
 
   constructor() {
@@ -36,6 +37,10 @@ class CommonStore {
 
   setPhone = (phone: string) => {
     this.phone = phone;
+  }
+
+  setUserPrice = (userPrice: string) => {
+    this.userPrice = userPrice;
   }
 
 }

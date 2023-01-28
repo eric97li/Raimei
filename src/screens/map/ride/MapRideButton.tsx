@@ -1,9 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { RootNavigationProp } from "src/types/navigation";
 import { useStore } from "../../../stores/store";
 
 const MapRideButton = () => {
+  const navigation = useNavigation<RootNavigationProp>();
   const { selectedRide } = useStore().commonStore;
 
   return (
@@ -16,6 +19,7 @@ const MapRideButton = () => {
           },
         ]}
         disabled={!selectedRide}
+        onPress={()=>navigation.navigate("DriverOffers")}
       >
         <Text style={styles.title}>Choose {selectedRide?.title}</Text>
       </TouchableOpacity>

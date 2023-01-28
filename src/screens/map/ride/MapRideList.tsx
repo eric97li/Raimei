@@ -2,12 +2,12 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 import rideData from "../../../data/mapRideData.json";
 import { useStore } from "../../../stores/store";
 import { calcRidePrice } from "../../../utils/calcRidePrice";
@@ -15,12 +15,15 @@ import { calcRidePrice } from "../../../utils/calcRidePrice";
 const MapRideList = () => {
   const { selectedRide, setSelectedRide } = useStore().commonStore;
   const { travelTimeInfo } = useStore().mapStore;
+  const { setUserPrice } = useStore().commonStore;
+
+
 
   return (
     <FlatList
       data={rideData}
       keyExtractor={(item) => item.title}
-      renderItem={({ item: { image, title, multiplier }, item }) => (
+      renderItem={({ item: { title, multiplier }, item }) => (
         <TouchableOpacity
           style={[
             styles.item,
@@ -34,6 +37,10 @@ const MapRideList = () => {
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
           </View>
+          <TextInput placeholder={"Price Request"} 
+        onChangeText={(value)=> setUserPrice(value)}
+        style={{ height: 42, width: "40%", borderBottomWidth: 1}}
+        />
           <Text style={styles.price}>
             {calcRidePrice(travelTimeInfo?.duration?.value || 0, multiplier)}
           </Text>

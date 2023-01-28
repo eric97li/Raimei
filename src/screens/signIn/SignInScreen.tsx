@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View, TextInput, Text} from "react-native";
-import { Icon } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
 import { useStore } from "../../stores/store";
 
@@ -11,7 +10,10 @@ const SignInScreen = () => {
   const { username, setUsername } = useStore().commonStore;
   const { password, setPassword } = useStore().commonStore;
 
-  const validate_field=(username: any, password: any)=>{
+  const validate_field=(username: string, password: string)=>{
+
+    username = username.trim();
+    password = password.trim();
 
     if(username == "" || username == null) {
       alert("Username or password is incorrect!")
@@ -110,7 +112,7 @@ const SignInScreen = () => {
             <View style={{marginTop: "2.5%", width: "80%"}}>
                 <TouchableOpacity accessible={true} accessibilityLabel="Sign Up Button" accessibilityHint="Activate to go to sign up page" style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "white", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#BDB5D5", alignSelf: "center", textAlign : "center"
               }}
               onPress={() => navigation.navigate("SignUp")}
               >
