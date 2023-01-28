@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GooglePlacesSearchInput from "../../../components/search/GooglePlacesSearchInput";
 import MapButtons from "./MapCardButtons";
-import MapCardFavourites from "./MapCardFavourites";
 
 const MapCard = () => {
   return (
@@ -15,7 +14,6 @@ const MapCard = () => {
           placeholder="Arrive at?"
           styles={inputStyles}
         />
-        <MapCardFavourites />
       </View>
       <MapButtons />
     </SafeAreaView>
