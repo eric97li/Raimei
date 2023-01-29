@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GooglePlacesSearchInput from "../../../components/search/GooglePlacesSearchInput";
-import MapButtons from "./MapCardButtons";
 
 const MapCard = () => {
   return (
@@ -15,7 +14,6 @@ const MapCard = () => {
           styles={inputStyles}
         />
       </View>
-      <MapButtons />
     </SafeAreaView>
   );
 };
