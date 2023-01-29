@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import GooglePlacesSearchInput from "../../../components/search/GooglePlacesSearchInput";
+import { ScrollView } from 'react-native-virtualized-view';
 
 const MapCard = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView disableScrollViewPanResponder={true} style={styles.container}>
       <Text style={styles.title}>Destination</Text>
       <View style={styles.details}>
         <GooglePlacesSearchInput
@@ -14,7 +14,7 @@ const MapCard = () => {
           styles={inputStyles}
         />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     fontSize: 20,
     lineHeight: 20,
+    paddingTop: 20
   },
   details: {
     borderTopWidth: 1,
