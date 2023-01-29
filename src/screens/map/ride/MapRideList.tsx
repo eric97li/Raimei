@@ -10,7 +10,6 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import rideData from "../../../data/mapRideData.json";
 import { useStore } from "../../../stores/store";
-import { calcRidePrice } from "../../../utils/calcRidePrice";
 
 const MapRideList = () => {
   const { selectedRide, setSelectedRide } = useStore().commonStore;
@@ -23,7 +22,7 @@ const MapRideList = () => {
     <FlatList
       data={rideData}
       keyExtractor={(item) => item.title}
-      renderItem={({ item: { title, multiplier }, item }) => (
+      renderItem={({ item: { title }, item }) => (
         <TouchableOpacity
           style={[
             styles.item,
@@ -41,9 +40,6 @@ const MapRideList = () => {
         onChangeText={(value)=> setUserPrice(value)}
         style={{ height: 42, width: "40%", borderBottomWidth: 1}}
         />
-          <Text style={styles.price}>
-            {calcRidePrice(travelTimeInfo?.duration?.value || 0, multiplier)}
-          </Text>
         </TouchableOpacity>
       )}
     />
