@@ -7160,11 +7160,6 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native-virtualized-view@^1.0.0":
-  "integrity" "sha512-7YyFMMkNzJ787/giGkKcm0JEx0IcLEE/XHREGz2I4K1RISQGFjEDe6iWsapOnHSR/e1vhebZJ8VmqhSpg5YPzg=="
-  "resolved" "https://registry.npmjs.org/react-native-virtualized-view/-/react-native-virtualized-view-1.0.0.tgz"
-  "version" "1.0.0"
-
 "react-native-web@~0.18.7":
   "integrity" "sha512-YV2gtZa1n7ulTGp+HcxH+KsAtaDPBI/dKd9oOQS31zyFHURjObLUVkKnGjkmlYAUReWfvmlU64GzyNwoZF9/tA=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.18.10.tgz"
