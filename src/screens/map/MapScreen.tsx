@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Platform } from "react-native";
 import { Icon } from "react-native-elements";
 import { useStore } from "../../stores/store";
 import { MapStackParamList, RootNavigationProp } from "../../types/navigation";
@@ -29,10 +29,10 @@ const MapScreen = () => {
       >
         <Icon name="menu" />
       </TouchableOpacity>
-      <View style={styles.half}>
+      <View style={styles.mapHeight}>
         <Map />
       </View>
-      <View style={styles.half}>
+      <View style={styles.cardHeight}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="MapCard" component={NavCard} />
           <Stack.Screen name="MapRide" component={RideOptionsCard} />
@@ -62,7 +62,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  half: {
-    height: "50%",
+  mapHeight: {
+    height: Platform.OS === 'ios' ? "40%" : "50%"
+  },
+  cardHeight: {
+    height: Platform.OS === 'ios' ? "60%" : "50%"
   },
 });

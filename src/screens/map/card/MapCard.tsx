@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-virtualized-view';
 
 const MapCard = () => {
   return (
-    <ScrollView disableScrollViewPanResponder={true} style={styles.container}>
+    <ScrollView disableScrollViewPanResponder={true} automaticallyAdjustKeyboardInsets={true} style={styles.container}>
       <Text style={styles.title}>Destination</Text>
       <View style={styles.details}>
         <GooglePlacesSearchInput

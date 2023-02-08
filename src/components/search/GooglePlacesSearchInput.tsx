@@ -23,6 +23,7 @@ const GooglePlacesSearchInput: React.FC<GooglePlacesSearchInputProps> = ({
   return (
     <GooglePlacesAutocomplete
       placeholder={placeholder}
+      textInputProps={{placeholderTextColor: "#BDB5D5"}}
       nearbyPlacesAPI="GooglePlacesSearch"
       debounce={400}
       minLength={2}

@@ -89,10 +89,12 @@ const SignInScreen = () => {
         />
         <Text style={{color: "black", fontSize: 50, marginBottom: 40}}>Raimei</Text>
         <TextInput placeholder={"Username"}
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setUsername(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1}}
         />
         <TextInput placeholder={"Password"} 
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setPassword(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />

@@ -162,22 +162,27 @@ const SignUpScreen = () => {
         />
         <Text style={{color: "black", fontSize: 50, marginBottom: 30}}>Raimei</Text>
         <TextInput placeholder={"Name"}
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setName(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1}}
         />
         <TextInput placeholder={"Username"}
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setUsername(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
         <TextInput placeholder={"Password"} 
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setPassword(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
         <TextInput placeholder={"Email"} 
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setEmail(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
         <TextInput placeholder={"Phone"} 
+        placeholderTextColor="#BDB5D5"
         onChangeText={(value)=> setPhone(value)}
         style={{ height: 42, width: "80%", borderBottomWidth: 1, marginTop: "5%"}}
         />
