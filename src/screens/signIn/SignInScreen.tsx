@@ -12,9 +12,6 @@ const SignInScreen = () => {
 
   const validate_field=(username: string, password: string)=>{
 
-    username = username.trim();
-    password = password.trim();
-
     if(username == "" || username == null) {
       alert("Username or password is incorrect!")
       return false
@@ -22,6 +19,9 @@ const SignInScreen = () => {
       alert("Username or password is incorrect!")
       return false
     }
+
+    username = username.trim();
+    password = password.trim();
     
     let axios = require('axios');
       let data = JSON.stringify({
