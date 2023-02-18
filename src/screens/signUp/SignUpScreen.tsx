@@ -189,7 +189,7 @@ const SignUpScreen = () => {
             <View style={{marginTop: "10%", width: "80%"}}>
                 <TouchableOpacity style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "#4f284b", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#4f284b", alignSelf: "center"
               }}
               onPress={()=>signup_field(name, username, password, email, phone)}
               >
@@ -199,7 +199,7 @@ const SignUpScreen = () => {
             <View style={{marginTop: "10%", width: "80%"}}>
                 <TouchableOpacity style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "#BDB5D5", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#BDB5D5", alignSelf: "center"
               }}
               onPress={()=>navigation.navigate("SignIn")}
               >

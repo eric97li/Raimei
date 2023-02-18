@@ -4,6 +4,7 @@ import { MapRideItem } from "../types/map";
 class CommonStore {
   selectedRide: MapRideItem | null = null;
   name: string | null = null;
+  updateName: string | null = null;
   username: string | null = null;
   password: string | null = null;
   email: string | null = null;
@@ -21,6 +22,10 @@ class CommonStore {
 
   setName = (name: string) => {
     this.name = name;
+  }
+
+  setUpdateName = (updateName: string) => {
+    this.updateName = updateName;
   }
 
   setUsername = (username: string) => {

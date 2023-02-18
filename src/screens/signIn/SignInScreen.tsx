@@ -104,7 +104,7 @@ const SignInScreen = () => {
             <View style={{marginTop: "10%", width: "80%"}}>
                 <TouchableOpacity accessible={true} accessibilityLabel="Login Button" accessibilityHint="Activate to login" style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "#4f284b", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#4f284b", alignSelf: "center"
               }}
               onPress={()=> validate_field(username, password)}
               >
@@ -117,7 +117,7 @@ const SignInScreen = () => {
             <View style={{marginTop: "2.5%", width: "80%"}}>
                 <TouchableOpacity accessible={true} accessibilityLabel="Sign Up Button" accessibilityHint="Activate to go to sign up page" style={{ borderWidth : 1, height : 42, width: "80%"
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
-              backgroundColor: "#BDB5D5", alignSelf: "center", textAlign : "center"
+              backgroundColor: "#BDB5D5", alignSelf: "center"
               }}
               onPress={() => navigation.navigate("SignUp")}
               >
