@@ -8,9 +8,48 @@ import { useStore } from "../../stores/store";
 
 const ProfileScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const { name } = useStore().commonStore;
-  // const { username } = useStore().commonStore;
-  // const { password } = useStore().commonStore;
+  const { name, setName } = useStore().commonStore;
+  const { username } = useStore().commonStore;
+  const { password } = useStore().commonStore;
+
+  let axios = require('axios');
+  let data = JSON.stringify({
+      "collection": "users",
+      "database": "RaimeiDB",
+      "dataSource": "Cluster0"
+  });
+
+  let config = {
+      method: 'post',
+      url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/find',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+      },
+      data: data
+  };
+
+  axios(config)
+      .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          // console.log(response.data.documents[i].username);
+          // console.log(response.data.documents.length);
+      
+        //users begin at id 1
+
+        for(let i = 1; i < response.data.documents.length; i++) {
+          
+          if((response.data.documents[i].username == username) && (response.data.documents[i].password == password)) {
+            setName(response.data.documents[i].name);
+            break;
+          }
+        }
+
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
 
   return (
     <View>

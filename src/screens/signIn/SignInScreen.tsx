@@ -22,6 +22,9 @@ const SignInScreen = () => {
 
     username = username.trim();
     password = password.trim();
+
+    setUsername(username);
+    setPassword(password);
     
     let axios = require('axios');
       let data = JSON.stringify({
