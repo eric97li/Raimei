@@ -110,7 +110,8 @@ const SignUpScreen = () => {
                       "driverHistory": [],
                       "rideHistory": [],
                       "driverRating": 0,
-                      "riderRating": 0
+                      "riderRating": 0,
+                      "selectedRide": ""
                     }
                   });
 

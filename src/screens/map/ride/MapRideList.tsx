@@ -36,11 +36,13 @@ const MapRideList = () => {
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
           </View>
-          <TextInput placeholder={"Price Request"} 
-          placeholderTextColor="#BDB5D5"
-        onChangeText={(value)=> setUserPrice(value)}
-        style={{ height: 42, width: "40%", borderBottomWidth: 1}}
-        />
+          { (title === selectedRide?.title) &&
+            <TextInput placeholder={"Price Request"} 
+            placeholderTextColor="#4f284b"
+          onChangeText={(value)=> setUserPrice(value)}
+          style={{ height: 42, width: "40%", borderBottomWidth: 1}}
+          />
+      }
         </TouchableOpacity>
       )}
     />

@@ -9,6 +9,11 @@ const MapRideButton = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const { selectedRide } = useStore().commonStore;
 
+  // const set_selectedRide = () => {
+
+  //   navigation.navigate("DriverOffers")
+  // }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
