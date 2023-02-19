@@ -10,7 +10,7 @@ const SignInScreen = () => {
   const { username, setUsername } = useStore().commonStore;
   const { password, setPassword } = useStore().commonStore;
 
-  const validate_field=(username: string, password: string)=>{
+  const validate_field = (username: string, password: string) => {
 
     if(username == "" || username == null) {
       alert("Username or password is incorrect!")

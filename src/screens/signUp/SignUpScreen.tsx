@@ -13,7 +13,7 @@ const SignUpScreen = () => {
   const { email, setEmail } = useStore().commonStore;
   const { phone, setPhone } = useStore().commonStore;
 
-  const signup_field=(name: string, username: string, password: string, email: string, phone: string)=>{
+  const signup_field = (name: string, username: string, password: string, email: string, phone: string) => {
     // console.log(username.username);
     // console.log(password.password);
     if(username == "" || username == null) {

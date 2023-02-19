@@ -15,7 +15,45 @@ import { RootNavigationProp } from "../../types/navigation";
 
 const NavOptions = () => {
   const { origin } = useStore().mapStore;
+  const { username } = useStore().commonStore;
   const navigation = useNavigation<RootNavigationProp>();
+
+  const set_origin = (screen: string) => {
+
+    let axios = require('axios');
+    let data = JSON.stringify({
+        "collection": "users",
+        "database": "RaimeiDB",
+        "dataSource": "Cluster0",
+        "filter": { "username": username },
+        "update": {
+          "$set": {
+            "pickUpLocation": origin?.description
+          }
+        }
+    });
+
+    let config = {
+        method: 'post',
+        url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/updateOne',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    navigation.navigate(screen)
+  }
 
   return (
     <FlatList
@@ -26,7 +64,7 @@ const NavOptions = () => {
       renderItem={({ item: { title, screen } }) => (
         <TouchableOpacity
           style={styles.item}
-          onPress={() => navigation.navigate(screen)}
+          onPress={() => set_origin(screen)}
           disabled={!origin && title != "Drive"}
         >
           <View style={(!origin && title != "Drive") && { opacity: 0.2 }}>
