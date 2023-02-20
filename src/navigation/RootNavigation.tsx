@@ -12,6 +12,7 @@ import GPSScreen from "../screens/gps/GPSScreen";
 import AwaitDriverScreen from "../screens/awaitDriver/AwaitDriverScreen";
 import { RootStackParamList } from "../types/navigation";
 import DriverOffersScreen from "../screens/drivers/DriverOffersScreen";
+import SetDriverInfoScreen from "../screens/setDriverInfo/SetDriverInfoScreen";
 
 interface NavigationProps {}
 
@@ -35,6 +36,7 @@ const RootNavigator = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="SetDriverInfo" component={SetDriverInfoScreen} />
       <Stack.Screen name="DriverOffers" component={DriverOffersScreen} />
       <Stack.Screen name="RidersQueue" component={RidersQueueScreen} />
       <Stack.Screen name="AwaitDriver" component={AwaitDriverScreen} />

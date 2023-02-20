@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Profile: undefined;
   GPS: undefined;
   AwaitDriver: undefined;
+  SetDriverInfo: undefined;
 };
 
 export type MapStackParamList = {
