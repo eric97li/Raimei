@@ -9,13 +9,17 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import rideData from "../../../data/mapRideData.json";
+import currencyData from "../../../data/currency.json";
 import { useStore } from "../../../stores/store";
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const MapRideList = () => {
   const { selectedRide, setSelectedRide } = useStore().commonStore;
   const { travelTimeInfo } = useStore().mapStore;
   const { setUserPrice } = useStore().commonStore;
 
+  const [selected, setSelected] = React.useState("");
+  const defaultValue = {"value":"US Dollar","key":"USD"};
 
 
   return (
@@ -36,13 +40,28 @@ const MapRideList = () => {
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
           </View>
-          { (title === selectedRide?.title) &&
-            <TextInput placeholder={"Price Request"} 
-            placeholderTextColor="#4f284b"
-          onChangeText={(value)=> setUserPrice(value)}
-          style={{ height: 42, width: "40%", borderBottomWidth: 1}}
-          />
+          <View style={{paddingLeft:20, width: 160}}>
+            {
+              (title === selectedRide?.title) &&
+          <SelectList 
+            setSelected={(val) => setSelected(val)} 
+            data={currencyData} 
+            placeholder="Currency"
+            defaultOption={defaultValue}
+            save="value"
+            />
+          }
+          </View>
+          <View style={{paddingLeft:20}}>
+            { (title === selectedRide?.title) &&
+              <TextInput placeholder={"Price Request"} 
+              placeholderTextColor="#4f284b"
+            onChangeText={(value)=> setUserPrice(value)}
+            keyboardType="numeric"
+            style={{ height: 42, borderBottomWidth: 1}}
+            />
       }
+      </View>
         </TouchableOpacity>
       )}
     />
