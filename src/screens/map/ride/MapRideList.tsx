@@ -11,7 +11,7 @@ import { TextInput } from "react-native-gesture-handler";
 import rideData from "../../../data/mapRideData.json";
 import currencyData from "../../../data/currency.json";
 import { useStore } from "../../../stores/store";
-import { SelectList } from 'react-native-dropdown-select-list'
+import { SelectList } from 'react-native-dropdown-select-list';
 
 const MapRideList = () => {
   const { selectedRide, setSelectedRide } = useStore().commonStore;
@@ -24,6 +24,8 @@ const MapRideList = () => {
 
   return (
     <FlatList
+      disableScrollViewPanResponder={true}
+      automaticallyAdjustKeyboardInsets={true}
       data={rideData}
       keyExtractor={(item) => item.title}
       renderItem={({ item: { title }, item }) => (
@@ -40,7 +42,7 @@ const MapRideList = () => {
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>{travelTimeInfo?.duration?.text || "Travel Time"} </Text>
           </View>
-          <View style={{paddingLeft:20, width: 160}}>
+          <View style={{marginLeft:10, width: "40%"}}>
             {
               (title === selectedRide?.title) &&
           <SelectList 
@@ -52,7 +54,7 @@ const MapRideList = () => {
             />
           }
           </View>
-          <View style={{paddingLeft:20}}>
+          <View style={{marginLeft: 10, paddingRight: 5, width: "60%"}}>
             { (title === selectedRide?.title) &&
               <TextInput placeholder={"Price Request"} 
               placeholderTextColor="#4f284b"
