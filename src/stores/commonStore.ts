@@ -10,6 +10,7 @@ class CommonStore {
   email: string | null = null;
   phone: string | null = null;
   userPrice: string | null = null;
+  driverLocation: string | null = null;
 
 
   constructor() {
@@ -46,6 +47,10 @@ class CommonStore {
 
   setUserPrice = (userPrice: string) => {
     this.userPrice = userPrice;
+  }
+
+  setDriverLocation = (driverLocation: string) => {
+    this.driverLocation = driverLocation;
   }
 
 }
