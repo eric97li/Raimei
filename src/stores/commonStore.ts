@@ -11,6 +11,8 @@ class CommonStore {
   phone: string | null = null;
   userPrice: string | null = null;
   driverLocation: string | null = null;
+  info: string | null = null;
+  updateInfo: string | null = null;
 
 
   constructor() {
@@ -51,6 +53,14 @@ class CommonStore {
 
   setDriverLocation = (driverLocation: string) => {
     this.driverLocation = driverLocation;
+  }
+
+  setInfo = (info: string) => {
+    this.info = info;
+  }
+
+  setUpdateInfo = (updateInfo: string) => {
+    this.updateInfo = updateInfo;
   }
 
 }

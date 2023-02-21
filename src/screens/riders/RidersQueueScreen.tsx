@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, Text } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
 
 const RidersQueueScreen = () => {
@@ -12,10 +12,11 @@ const RidersQueueScreen = () => {
     <View>
       <TouchableOpacity
         style={styles.iconButton}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("SetDriverInfo")}
       >
         <Icon name="menu" />
       </TouchableOpacity>
+      <Text style={{color: "black", fontSize: 50, marginTop: 100,marginBottom: 40, alignSelf:"center"}}>Riders Queue</Text>
     </View>
   );
 };
