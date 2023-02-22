@@ -13,6 +13,7 @@ class CommonStore {
   driverLocation: string | null = null;
   info: string | null = null;
   updateInfo: string | null = null;
+  currency: string | null = null;
 
 
   constructor() {
@@ -49,6 +50,10 @@ class CommonStore {
 
   setUserPrice = (userPrice: string) => {
     this.userPrice = userPrice;
+  }
+
+  setCurrency = (currency: string) => {
+    this.currency = currency;
   }
 
   setDriverLocation = (driverLocation: string) => {

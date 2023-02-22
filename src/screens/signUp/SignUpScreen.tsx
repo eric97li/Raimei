@@ -92,7 +92,7 @@ const SignUpScreen = () => {
                       "phone": phone,
                       "username": username,
                       "password": password,
-                      "info": "car-nums",
+                      "info": "",
                       "pickUpLocation": "",
                       "dropOffLocation": "",
                       "driverLocation": "",
@@ -104,14 +104,17 @@ const SignUpScreen = () => {
                       "offerPrice": 0,
                       "endPrice": 0,
                       "dropOffTravelTime": "",
-                      "pickUpArrivalTime": "",
+                      "pickUpTravelTime": "",
                       "pickUpTime": "",
                       "dropOffTime": "",
-                      "driverHistory": [],
+                      "driveHistory": [],
                       "rideHistory": [],
                       "driverRating": 0,
                       "riderRating": 0,
-                      "selectedRide": ""
+                      "selectedRide": "",
+                      "currency": "",
+                      "dropOffTravelDistance": "",
+                      "pickUpTravelDistance": ""
                     }
                   });
 

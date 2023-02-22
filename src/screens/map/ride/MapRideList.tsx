@@ -17,8 +17,7 @@ const MapRideList = () => {
   const { selectedRide, setSelectedRide } = useStore().commonStore;
   const { travelTimeInfo } = useStore().mapStore;
   const { setUserPrice } = useStore().commonStore;
-
-  const [selected, setSelected] = React.useState("");
+  const { setCurrency } = useStore().commonStore;
   const defaultValue = {"value":"US Dollar","key":"USD"};
 
 
@@ -46,7 +45,7 @@ const MapRideList = () => {
             {
               (title === selectedRide?.title) &&
           <SelectList 
-            setSelected={(val) => setSelected(val)} 
+            setSelected={(val) => setCurrency(val)} 
             data={currencyData} 
             placeholder="Currency"
             defaultOption={defaultValue}
