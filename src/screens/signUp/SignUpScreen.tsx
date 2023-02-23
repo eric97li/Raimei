@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, TextInput, Text, Image} from "react-native";
+import { StyleSheet, TouchableOpacity, View, TextInput, Text, Image, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform} from "react-native";
 import { RootNavigationProp } from "../../types/navigation";
 import { useStore } from "../../stores/store";
 
@@ -155,8 +155,9 @@ const SignUpScreen = () => {
   }
   
   return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
     <View>
-
       <View style={{width: "100%", height :"100%", justifyContent: "center"
       , alignSelf: "center", alignContent: "center", alignItems: "center", backgroundColor: "#ffb7c5"
       }}>
@@ -217,6 +218,8 @@ const SignUpScreen = () => {
 
       </View>
     </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
