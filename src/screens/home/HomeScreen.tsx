@@ -8,33 +8,43 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { MapStackParamList, RootNavigationProp } from "src/types/navigation";
 import { CheckBox, Icon } from "react-native-elements";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useStore } from "../../stores/store";
 
 const HomeScreen = () => {
   const Stack = createStackNavigator<MapStackParamList>();
   const navigation = useNavigation<RootNavigationProp>();
+
+  const { setReserve } = useStore().commonStore;
+  const { setReserveDate } = useStore().commonStore;
+  const { setReserveTime } = useStore().commonStore;
 
   const [isSelected, setSelection] = useState();
 
   const [mydate, setDate] = useState(new Date());
   const [displaymodeDate] = useState('date');
   const [isDisplayDate, setShowDate] = useState(isSelected);
+  setReserveDate(mydate.toLocaleDateString());
   const changeSelectedDate = (event, selectedDate) => {
   const currentDate = selectedDate || mydate;
   setDate(currentDate);
+  setReserveDate(mydate.toLocaleDateString());
 };
 
 const [mydateTime, setDateTime] = useState(new Date());
 const [displaymodeTime] = useState('time');
 const [isDisplayDateTime, setShowTime] = useState(isSelected);
+setReserveTime(mydateTime.toLocaleTimeString());
 const changeSelectedDateTime = (event, selectedDateTime) => {
   const currentDateTime = selectedDateTime || mydateTime;
   setDateTime(currentDateTime);
+  setReserveTime(mydateTime.toLocaleTimeString());
 };
 
 const set_selection = () => {
   setSelection(!isSelected);
   setShowTime(!isSelected);
   setShowDate(!isSelected);
+  setReserve(String(!isSelected));
 }
 
   return (

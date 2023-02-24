@@ -14,6 +14,9 @@ class CommonStore {
   info: string | null = null;
   updateInfo: string | null = null;
   currency: string | null = null;
+  reserve: string | null = null;
+  reserveDate: string | null = null;
+  reserveTime: string | null = null;
 
 
   constructor() {
@@ -66,6 +69,18 @@ class CommonStore {
 
   setUpdateInfo = (updateInfo: string) => {
     this.updateInfo = updateInfo;
+  }
+
+  setReserve = (reserve: string) => {
+    this.reserve = reserve;
+  }
+
+  setReserveDate = (reserveDate: string) => {
+    this.reserveDate = reserveDate;
+  }
+
+  setReserveTime = (reserveTime: string) => {
+    this.reserveTime = reserveTime;
   }
 
 }
