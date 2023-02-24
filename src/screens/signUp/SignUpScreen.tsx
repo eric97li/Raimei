@@ -99,7 +99,6 @@ const SignUpScreen = () => {
                       "favouriteOrigins": [],
                       "favouriteDestinations": [],
                       "reserved": [],
-                      "estPrice": 0,
                       "userPrice": 0,
                       "offerPrice": 0,
                       "endPrice": 0,
