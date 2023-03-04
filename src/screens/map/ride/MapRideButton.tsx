@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootNavigationProp } from "src/types/navigation";
 import { useStore } from "../../../stores/store";
 
@@ -13,10 +13,41 @@ const MapRideButton = () => {
   const { currency } = useStore().commonStore;
   const { username } = useStore().commonStore;
 
-  const { reserve, setReserve } = useStore().commonStore;
-  const { reserveDate, setReserveDate } = useStore().commonStore;
-  const { reserveTime, setReserveTime } = useStore().commonStore;
+  const { reserve } = useStore().commonStore;
+  const { reserveDate } = useStore().commonStore;
+  const { reserveTime } = useStore().commonStore;
   const { origin, destination } = useStore().mapStore;
+
+  const confirm_selectedRide = () => {
+
+    if (userPrice == "" || userPrice == null) {
+      alert("Please input a Price Request!")
+      return false
+    }
+
+    if (selectedRide?.title == "" || selectedRide?.title == null) {
+      alert("Please select a Ride type")
+      return false
+    }
+
+    if (currency == "" || currency == null) {
+      alert("Please select a currency")
+      return false
+    }
+
+    Alert.alert('Confirm Inputs',
+    'Ride Type: ' + selectedRide?.title + ', Currency: ' + currency + ', Price Requested: ' + userPrice,
+    [
+      {
+      text: 'Cancel',
+      onPress:() => {return false;}
+    },
+    {
+      text: 'Ok', onPress: () => {set_selectedRide()}
+    }
+    ]
+    );
+  }
 
   const set_selectedRide = () => {
     // Default ride
@@ -50,7 +81,7 @@ const MapRideButton = () => {
         };
 
         axios(config)
-            .then(function (response) {
+            .then(function () {
                 // console.log(JSON.stringify(response.data));
                 navigation.navigate("DriverOffers");
             })
@@ -130,7 +161,7 @@ const MapRideButton = () => {
                 };
 
                 axios(config)
-                    .then(function (response) {
+                    .then(function () {
                         // console.log(JSON.stringify(response.data));
                         navigation.navigate("DriverOffers");
                     })
@@ -156,7 +187,7 @@ const MapRideButton = () => {
           },
         ]}
         disabled={!selectedRide}
-        onPress={()=> set_selectedRide()}
+        onPress={()=> confirm_selectedRide()}
       >
         <Text style={styles.title}>Choose {selectedRide?.title}</Text>
       </TouchableOpacity>
