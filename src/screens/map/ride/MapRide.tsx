@@ -10,6 +10,8 @@ const MapRide = () => {
 
   const { destination } = useStore().mapStore;
   const { username } = useStore().commonStore;
+  const { setUserPrice } = useStore().commonStore;
+  const { setSelectedRide } = useStore().commonStore;
 
   let axios = require('axios');
   let dataDB = JSON.stringify({
@@ -38,6 +40,8 @@ const MapRide = () => {
   axios(config)
       .then(function (response) {
           // console.log(JSON.stringify(response.data));
+          setUserPrice("");
+          setSelectedRide(null);
       })
       .catch(function (error) {
           console.log(error);
