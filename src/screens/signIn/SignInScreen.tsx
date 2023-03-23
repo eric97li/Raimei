@@ -55,9 +55,7 @@ const SignInScreen = () => {
               alert("Username entered does not match any account")
             }
 
-            //users begin at id 1
-
-            for(let i = 1; i < response.data.documents.length; i++) {
+            for(let i = 0; i < response.data.documents.length; i++) {
               // console.log(response[i].username)
               // console.log(response[i].password)
               if((response.data.documents[i].username == username) && (response.data.documents[i].password == password)) {

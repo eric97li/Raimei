@@ -12,6 +12,9 @@ const MapRideButton = () => {
   const { userPrice } = useStore().commonStore;
   const { currency } = useStore().commonStore;
   const { username } = useStore().commonStore;
+  const { name } = useStore().commonStore;
+  const { email } = useStore().commonStore;
+  const { phone } = useStore().commonStore;
 
   const { reserve } = useStore().commonStore;
   const { reserveDate } = useStore().commonStore;
@@ -52,26 +55,36 @@ const MapRideButton = () => {
   const set_selectedRide = () => {
     // Default ride
       if (reserve != "true") {
+
         let axios = require('axios');
         let data = JSON.stringify({
-            "collection": "users",
-            "database": "RaimeiDB",
-            "dataSource": "Cluster0",
-            "filter": { "username": username },
-            "update": {
-              "$set": {
-                "currency": currency,
-                "dropOffTravelDistance": travelTimeInfo?.distance?.text,
-                "dropOffTravelTime": travelTimeInfo?.duration?.text,
-                "selectedRide": selectedRide?.title,
-                "userPrice": userPrice,
-              }
-            }
-        });
+          "collection": "ridesQueue",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "document": {
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "username": username,
+            "pickUpLocation": origin?.description,
+            "dropOffLocation": destination?.description,
+            "selectedRide": selectedRide?.title,
+            "currency": currency,
+            "userPrice": userPrice,
+            "offerPrice": 0,
+            "endPrice": 0,
+            "dropOffTravelTime": travelTimeInfo?.duration?.text,
+            "dropOffTravelDistance": travelTimeInfo?.distance?.text,
+            "pickUpArrivalTime": "",
+            "pickUpTime": "",
+            "dropOffTime": "",
+            "negotiationsRide": []
+          }
+          });
 
         let config = {
             method: 'post',
-            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/updateOne',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/insertOne',
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Request-Headers': '*',
@@ -80,100 +93,68 @@ const MapRideButton = () => {
             data: data
         };
 
-        axios(config)
-            .then(function () {
-                // console.log(JSON.stringify(response.data));
-                navigation.navigate("DriverOffers");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+      axios(config)
+        .then(function () {
+            // console.log(JSON.stringify(response.data));
+            navigation.navigate("DriverOffers");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
       }
       // Reserve ride
       else {
-        let reserveObj = new Object();
-        reserveObj.reserve = reserve;
-        reserveObj.reserveDate = reserveDate;
-        reserveObj.reserveTime = reserveTime;
-        reserveObj.origin = origin?.description;
-        reserveObj.destination = destination?.description;
-        reserveObj.currency = currency;
-        reserveObj.dropOffTravelDistance = travelTimeInfo?.distance?.text;
-        reserveObj.dropOffTravelTime = travelTimeInfo?.duration?.text;
-        reserveObj.selectedRide = selectedRide?.title;
-        reserveObj.userPrice = userPrice;
-        let reserveObjString = JSON.stringify(reserveObj);
-
-        // Get existing reserve obj array of the user
 
         let axios = require('axios');
-        let dataGetReserveArray = JSON.stringify({
-            "collection": "users",
-            "database": "RaimeiDB",
-            "dataSource": "Cluster0",
-            "filter": {
-              "username": username
-            }
-        });
+        let data = JSON.stringify({
+          "collection": "reservesQueue",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "document": {
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "username": username,
+            "pickUpLocation": origin?.description,
+            "dropOffLocation": destination?.description,
+            "selectedRide": selectedRide?.title,
+            "currency": currency,
+            "userPrice": userPrice,
+            "offerPrice": 0,
+            "endPrice": 0,
+            "dropOffTravelTime": travelTimeInfo?.duration?.text,
+            "dropOffTravelDistance": travelTimeInfo?.distance?.text,
+            "pickUpArrivalTime": "",
+            "pickUpTime": "",
+            "dropOffTime": "",
+            "reserve": reserve,
+            "reserveDate": reserveDate,
+            "reserveTime": reserveTime,
+            "negotiationsReserve": []
+          }
+          });
 
         let config = {
             method: 'post',
-            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/insertOne',
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Request-Headers': '*',
               'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
             },
-            data: dataGetReserveArray
+            data: data
         };
 
-        axios(config)
-            .then(function (response) {
-                // console.log(JSON.stringify(response.data));
+      axios(config)
+        .then(function () {
+            // console.log(JSON.stringify(response.data));
+            navigation.navigate("DriverOffers");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
-                let reservedArray = response.data.document.reserved;
-                reservedArray.push(reserveObjString);
-
-                // Update user's reserve obj array with the added reserve ride json string
-
-                let axios = require('axios');
-                let dataUpdateReserveArray = JSON.stringify({
-                    "collection": "users",
-                    "database": "RaimeiDB",
-                    "dataSource": "Cluster0",
-                    "filter": { "username": username },
-                    "update": {
-                      "$set": {
-                        "reserved": reservedArray
-                      }
-                    }
-                });
-
-                let config = {
-                    method: 'post',
-                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/updateOne',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Access-Control-Request-Headers': '*',
-                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
-                    },
-                    data: dataUpdateReserveArray
-                };
-
-                axios(config)
-                    .then(function () {
-                        // console.log(JSON.stringify(response.data));
-                        navigation.navigate("DriverOffers");
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
       }
   }
 

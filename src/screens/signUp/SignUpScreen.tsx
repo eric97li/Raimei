@@ -62,10 +62,9 @@ const SignUpScreen = () => {
               // console.log(response.data.documents[i].username);
               // console.log(response.data.documents.length);
         
-              //users begin at id 1
               //get list of usernames
               let usernameList = [];
-              for(let i = 1; i < response.data.documents.length; i++) {
+              for(let i = 0; i < response.data.documents.length; i++) {
                 usernameList.push(response.data.documents[i].username)
               }
               //check array of usernames
@@ -98,7 +97,6 @@ const SignUpScreen = () => {
                       "driverLocation": "",
                       "favouriteOrigins": [],
                       "favouriteDestinations": [],
-                      "reserved": [],
                       "userPrice": 0,
                       "offerPrice": 0,
                       "endPrice": 0,
