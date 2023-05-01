@@ -50,8 +50,7 @@ const SignInScreen = () => {
               // console.log(response.data.documents[i].username);
               // console.log(response.data.documents.length);
 
-            //only the initial api placeholder parameters index 0
-            if(response.data.documents.length == 1) {
+            if(response.data.documents.length == 0) {
               alert("Username entered does not match any account")
             }
 
