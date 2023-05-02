@@ -12,9 +12,9 @@ const MapRideButton = () => {
   const { userPrice } = useStore().commonStore;
   const { currency } = useStore().commonStore;
   const { username } = useStore().commonStore;
-  const { name } = useStore().commonStore;
-  const { email } = useStore().commonStore;
-  const { phone } = useStore().commonStore;
+  const { name, setName } = useStore().commonStore;
+  const { email, setEmail } = useStore().commonStore;
+  const { phone, setPhone } = useStore().commonStore;
 
   const { reserve } = useStore().commonStore;
   const { reserveDate } = useStore().commonStore;
@@ -55,8 +55,105 @@ const MapRideButton = () => {
   const set_selectedRide = () => {
     // Default ride
       if (reserve != "true") {
-
+        
         let axios = require('axios');
+        let dataGetUser = JSON.stringify({
+            "collection": "users",
+            "database": "RaimeiDB",
+            "dataSource": "Cluster0",
+            "filter": {
+              "username": username
+            }
+        });
+
+        let config = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: dataGetUser
+        };
+
+        axios(config)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+              setName(response.data.document.name);    
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // Get Email info
+        let data2 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+        });
+
+        let config2 = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: data2
+        };
+
+        axios(config2)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+          
+              setEmail(response.data.document.email);  
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+          // Get Phone info
+          let data3 = JSON.stringify({
+            "collection": "users",
+            "database": "RaimeiDB",
+            "dataSource": "Cluster0",
+            "filter": {
+              "username": username
+            }
+        });
+
+        let config3 = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: data3
+        };
+
+        axios(config3)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+          
+              setPhone(response.data.document.phone);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        //Build Ride Request and insert to data store
+
+        let axiosRideRequest = require('axios');
         let data = JSON.stringify({
           "collection": "ridesQueue",
           "database": "RaimeiDB",
@@ -82,7 +179,7 @@ const MapRideButton = () => {
           }
           });
 
-        let config = {
+        let configRideRequest = {
             method: 'post',
             url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/insertOne',
             headers: {
@@ -93,7 +190,7 @@ const MapRideButton = () => {
             data: data
         };
 
-      axios(config)
+      axiosRideRequest(configRideRequest)
         .then(function () {
             // console.log(JSON.stringify(response.data));
             navigation.navigate("DriverOffers");
@@ -107,6 +204,102 @@ const MapRideButton = () => {
       else {
 
         let axios = require('axios');
+        let dataGetUser = JSON.stringify({
+            "collection": "users",
+            "database": "RaimeiDB",
+            "dataSource": "Cluster0",
+            "filter": {
+              "username": username
+            }
+        });
+
+        let config = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: dataGetUser
+        };
+
+        axios(config)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+          
+              setName(response.data.document.name);    
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // Get Email info
+        let data2 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+        });
+
+        let config2 = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: data2
+        };
+
+        axios(config2)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+          
+              setEmail(response.data.document.email);  
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+          // Get Phone info
+          let data3 = JSON.stringify({
+            "collection": "users",
+            "database": "RaimeiDB",
+            "dataSource": "Cluster0",
+            "filter": {
+              "username": username
+            }
+        });
+
+        let config3 = {
+            method: 'post',
+            url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+            },
+            data: data3
+        };
+
+        axios(config3)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+          
+              setPhone(response.data.document.phone);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        let axiosRideRequest = require('axios');
         let data = JSON.stringify({
           "collection": "reservesQueue",
           "database": "RaimeiDB",
@@ -135,7 +328,7 @@ const MapRideButton = () => {
           }
           });
 
-        let config = {
+        let configRideRequest = {
             method: 'post',
             url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/insertOne',
             headers: {
@@ -146,7 +339,7 @@ const MapRideButton = () => {
             data: data
         };
 
-      axios(config)
+      axiosRideRequest(configRideRequest)
         .then(function () {
             // console.log(JSON.stringify(response.data));
             navigation.navigate("DriverOffers");
