@@ -9,8 +9,13 @@ const SignInScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const { username, setUsername } = useStore().commonStore;
   const { password, setPassword } = useStore().commonStore;
+  const { setEmail } = useStore().commonStore;
+  const { setPhone } = useStore().commonStore;
+  const { setName } = useStore().commonStore;
 
   const validate_field = (username: string, password: string) => {
+
+    //check username and password
 
     if(username == "" || username == null) {
       alert("Username or password is incorrect!")
@@ -58,6 +63,111 @@ const SignInScreen = () => {
               // console.log(response[i].username)
               // console.log(response[i].password)
               if((response.data.documents[i].username == username) && (response.data.documents[i].password == password)) {
+                //set name, email, and phone from data store of user
+
+                //name
+                let axios = require('axios');
+                let data = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let config = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: data
+                };
+
+                axios(config)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setName(response.data.document.name);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //email
+
+                let axiosEmail = require('axios');
+                let dataEmail = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configEmail = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataEmail
+                };
+
+                axiosEmail(configEmail)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setEmail(response.data.document.email);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //phone
+
+                let axiosPhone = require('axios');
+                let dataPhone = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configPhone = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataPhone
+                };
+
+                axiosPhone(configPhone)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setPhone(response.data.document.phone);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //go to Home page
+
                 navigation.navigate("Home");
                 break;
               }
