@@ -1,18 +1,152 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Icon, Text } from "react-native-elements";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ListItem, Icon, Text } from "react-native-elements";
+import {Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
 import { RootNavigationProp } from "../../types/navigation";
 import { Switch } from 'react-native-switch';
+import { useStore } from "../../stores/store";
 
 const DriverOffersScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const [toggleRideReserve, setToggleRideReserve] = useState(true);
+  const { username } = useStore().commonStore;
+  const [rideRequests, updateRideRequests] = useState([]);
+  const [reserveRequests, updateReserveRequests] = useState([]);
+  const [rideOffers, updateRideOffers] = useState<any[]>([]);
+  const [reserveOffers, updateReserveOffers] = useState<any[]>([]);
 
   const toggleSwitch = () => {
     setToggleRideReserve(!toggleRideReserve);
     };
+  
+  //update ride requests
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+
+    (async () => {
+      
+      let axios = require('axios');
+      let data = JSON.stringify({
+          "collection": "ridesQueue",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/find',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data
+      };
+
+      axios(config)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data)); 
+              // console.log(response.data.documents[0].dropOffLocation, response.data.documents[0].pickUpLocation,
+              //   response.data.documents[0]._id);
+              // response.data.document.negotiationsRide
+
+              //ride request objects
+              updateRideRequests(response.data.documents);
+
+              //build negotiation offers array from user's ride requests
+              const negotiationOffers = [];
+
+              for (const rideRequest of response.data.documents) {
+                for(const rideRequestOffer of rideRequest.negotiationsRide) {
+                  negotiationOffers.push(rideRequestOffer);
+                }
+              }
+
+              updateRideOffers(negotiationOffers);
+
+
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+            
+          })();
+
+  }, 1000);
+  return () => clearInterval(interval);
+
+  }, []);
+
+
+  //update reserve requests
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+
+    (async () => {
+      
+      let axios = require('axios');
+      let data = JSON.stringify({
+          "collection": "reservesQueue",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/find',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data
+      };
+
+      axios(config)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data)); 
+              // console.log(response.data.documents[0].dropOffLocation, response.data.documents[0].pickUpLocation,
+              //   response.data.documents[0]._id);
+              // response.data.document.negotiationsRide
+
+              //reserve ride objects
+              updateReserveRequests(response.data.documents);
+
+              //build negotiation offers array from user's reserve rides
+              const negotiationOffers = [];
+
+              for (const reserveRide of response.data.documents) {
+                for(const reserveRideOffer of reserveRide.negotiationsReserve) {
+                  negotiationOffers.push(reserveRideOffer);
+                }
+              }
+
+              updateReserveOffers(negotiationOffers);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+            
+          })();
+
+  }, 1000);
+  return () => clearInterval(interval);
+
+  }, []);
+
+
   return (
     <View>
       <TouchableOpacity
@@ -43,7 +177,47 @@ const DriverOffersScreen = () => {
           switchBorderRadius={40}
       />
       </View>
-      <Text style={{color: "black", fontSize: 50, marginTop: 100,marginBottom: 40, alignSelf:"center"}}>Driver Offers</Text>
+      <View>
+      {toggleRideReserve && 
+        <View> 
+          <Text style={{color: "black", fontSize: 30, marginTop: 5,marginBottom: 40, alignSelf:"center"}}>Ride Requests</Text>
+          <ScrollView>
+            {rideRequests.map((rideRequest: object) => (
+              <Collapse key={rideRequest._id}>
+              <CollapseHeader>
+                <ListItem bottomDivider>
+                  <ListItem.Content>
+                  <ListItem.Title style = {{ flexDirection: "column"}} > 
+                    <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {rideRequest.pickUpLocation}</Text></View>
+                    <View><Text style={{fontWeight: 'bold'}}>Dropoff: {rideRequest.dropOffLocation}</Text></View>
+                  </ListItem.Title>
+                  </ListItem.Content>
+                </ListItem>
+              </CollapseHeader>
+                <CollapseBody>
+                  <ListItem key={rideRequest._id} bottomDivider>
+                    <ListItem.Content>
+                      <ListItem.Subtitle>
+                        <Text>Ride Details:</Text>
+                      </ListItem.Subtitle>
+                    </ListItem.Content>
+                  </ListItem>
+                </CollapseBody>
+              </Collapse>
+            ))}
+          </ScrollView>
+        </View>
+      }
+      </View>
+      <View>
+      {!toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 5,marginBottom: 40, alignSelf:"center"}}>Reserve Requests</Text>}
+      </View>
+      <View>
+      {toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>Driver Ride Offers</Text>}
+      </View>
+      <View>
+      {!toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>Driver Reserve Offers</Text>}
+      </View>
     </View>
   );
 };
