@@ -11,6 +11,7 @@ import { useStore } from "../../stores/store";
 const DriverOffersScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const [toggleRideReserve, setToggleRideReserve] = useState(true);
+  const [expanded, setExpandedAccordionListItem] = useState(true);
   const { username } = useStore().commonStore;
   const [rideRequests, updateRideRequests] = useState([]);
   const [reserveRequests, updateReserveRequests] = useState([]);
@@ -19,6 +20,10 @@ const DriverOffersScreen = () => {
 
   const toggleSwitch = () => {
     setToggleRideReserve(!toggleRideReserve);
+    };
+
+  const setExpanded = () => {
+    setExpandedAccordionListItem(!expanded);
     };
   
   //update ride requests
@@ -180,32 +185,47 @@ const DriverOffersScreen = () => {
       <View>
       {toggleRideReserve && 
         <View> 
-          <Text style={{color: "black", fontSize: 30, marginTop: 5,marginBottom: 40, alignSelf:"center"}}>Ride Requests</Text>
-          <ScrollView>
-            {rideRequests.map((rideRequest: object) => (
-              <Collapse key={rideRequest._id}>
-              <CollapseHeader>
-                <ListItem bottomDivider>
-                  <ListItem.Content>
-                  <ListItem.Title style = {{ flexDirection: "column"}} > 
-                    <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {rideRequest.pickUpLocation}</Text></View>
-                    <View><Text style={{fontWeight: 'bold'}}>Dropoff: {rideRequest.dropOffLocation}</Text></View>
-                  </ListItem.Title>
-                  </ListItem.Content>
-                </ListItem>
-              </CollapseHeader>
-                <CollapseBody>
-                  <ListItem key={rideRequest._id} bottomDivider>
+          <ListItem.Accordion
+            content= {
+              <>
+              <ListItem.Content>
+                <ListItem.Title>
+                  <Text style={{color: "black", fontSize: 30, marginTop: 5, marginBottom: 40, alignSelf:"center"}}>Ride Requests</Text>
+                </ListItem.Title>
+              </ListItem.Content>
+              </>
+            }
+            isExpanded={expanded}
+            onPress={() => {
+              setExpanded();
+            }}
+            >
+            <ScrollView>
+              {rideRequests.map((rideRequest: object) => (
+                <Collapse key={rideRequest._id}>
+                <CollapseHeader>
+                  <ListItem bottomDivider>
                     <ListItem.Content>
-                      <ListItem.Subtitle>
-                        <Text>Ride Details:</Text>
-                      </ListItem.Subtitle>
+                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                      <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {rideRequest.pickUpLocation}</Text></View>
+                      <View><Text style={{fontWeight: 'bold'}}>Dropoff: {rideRequest.dropOffLocation}</Text></View>
+                    </ListItem.Title>
                     </ListItem.Content>
                   </ListItem>
-                </CollapseBody>
-              </Collapse>
-            ))}
-          </ScrollView>
+                </CollapseHeader>
+                  <CollapseBody>
+                    <ListItem key={rideRequest._id} bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Subtitle>
+                          <Text>Ride Details:</Text>
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                    </ListItem>
+                  </CollapseBody>
+                </Collapse>
+              ))}
+            </ScrollView>
+          </ListItem.Accordion>
         </View>
       }
       </View>
