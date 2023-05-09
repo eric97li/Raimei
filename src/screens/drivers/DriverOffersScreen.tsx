@@ -11,7 +11,10 @@ import { useStore } from "../../stores/store";
 const DriverOffersScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const [toggleRideReserve, setToggleRideReserve] = useState(true);
-  const [expanded, setExpandedAccordionListItem] = useState(true);
+  const [expandedAccordionRideRequests, setExpandedAccordionRideRequests] = useState(false);
+  const [expandedAccordionReserveRequests, setExpandedAccordionReserveRequests] = useState(false);
+  const [expandedAccordionRideOffers, setExpandedAccordionRideOffers] = useState(false);
+  const [expandedAccordionReserveOffers, setExpandedAccordionReserveOffers] = useState(false);
   const { username } = useStore().commonStore;
   const [rideRequests, updateRideRequests] = useState([]);
   const [reserveRequests, updateReserveRequests] = useState([]);
@@ -22,8 +25,20 @@ const DriverOffersScreen = () => {
     setToggleRideReserve(!toggleRideReserve);
     };
 
-  const setExpanded = () => {
-    setExpandedAccordionListItem(!expanded);
+  const setExpandedRideRequests = () => {
+    setExpandedAccordionRideRequests(!expandedAccordionRideRequests);
+    };
+
+  const setExpandedReserveRequests = () => {
+    setExpandedAccordionReserveRequests(!expandedAccordionReserveRequests);
+    };
+  
+  const setExpandedRideOffers = () => {
+    setExpandedAccordionRideOffers(!expandedAccordionRideOffers);
+    };
+
+  const setExpandedReserveOffers = () => {
+    setExpandedAccordionReserveOffers(!expandedAccordionReserveOffers);
     };
   
   //update ride requests
@@ -160,7 +175,7 @@ const DriverOffersScreen = () => {
       >
         <Icon name="menu" />
       </TouchableOpacity>
-      <View style={{ marginTop: 100,marginBottom: 40, alignSelf:"center"}}>
+      <View style={{ marginTop: 60, marginBottom: 20, alignSelf:"center"}}>
       <Switch
           value={toggleRideReserve}
           onValueChange={()=>{
@@ -182,7 +197,7 @@ const DriverOffersScreen = () => {
           switchBorderRadius={40}
       />
       </View>
-      <View>
+      <View style={{height: "50%"}}>
       {toggleRideReserve && 
         <View> 
           <ListItem.Accordion
@@ -195,12 +210,12 @@ const DriverOffersScreen = () => {
               </ListItem.Content>
               </>
             }
-            isExpanded={expanded}
+            isExpanded={expandedAccordionRideRequests}
             onPress={() => {
-              setExpanded();
+              setExpandedRideRequests();
             }}
             >
-            <ScrollView>
+            <ScrollView disableScrollViewPanResponder={true} automaticallyAdjustKeyboardInsets={true}>
               {rideRequests.map((rideRequest: object) => (
                 <Collapse key={rideRequest._id}>
                 <CollapseHeader>
@@ -226,18 +241,136 @@ const DriverOffersScreen = () => {
               ))}
             </ScrollView>
           </ListItem.Accordion>
+          <ListItem.Accordion
+            content= {
+              <>
+              <ListItem.Content>
+                <ListItem.Title>
+                  <Text style={{color: "black", fontSize: 30, marginTop: 5, marginBottom: 40, alignSelf:"center"}}>Driver Ride Offers</Text>
+                </ListItem.Title>
+              </ListItem.Content>
+              </>
+            }
+            isExpanded={expandedAccordionRideOffers}
+            onPress={() => {
+              setExpandedRideOffers();
+            }}
+            >
+            <ScrollView disableScrollViewPanResponder={true} automaticallyAdjustKeyboardInsets={true}>
+              {rideOffers.map((rideOffer: object) => (
+                <Collapse key={rideOffer._id}>
+                <CollapseHeader>
+                  <ListItem bottomDivider>
+                    <ListItem.Content>
+                    <ListItem.Title style = {{ flexDirection: "column"}} >
+                      <View><Text style={{fontWeight: 'bold'}}> {rideOffer}</Text></View>
+                    </ListItem.Title>
+                    </ListItem.Content>
+                  </ListItem>
+                </CollapseHeader>
+                  <CollapseBody>
+                    <ListItem key={rideOffer._id} bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Subtitle>
+                          <Text>Driver Details:</Text>
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                    </ListItem>
+                  </CollapseBody>
+                </Collapse>
+              ))}
+            </ScrollView>
+          </ListItem.Accordion>
+        </View>
+      }
+
+      {!toggleRideReserve &&
+        <View> 
+          <ListItem.Accordion
+            content= {
+              <>
+              <ListItem.Content>
+                <ListItem.Title>
+                  <Text style={{color: "black", fontSize: 30, marginTop: 5, marginBottom: 40, alignSelf:"center"}}>Reserve Requests</Text>
+                </ListItem.Title>
+              </ListItem.Content>
+              </>
+            }
+            isExpanded={expandedAccordionReserveRequests}
+            onPress={() => {
+              setExpandedReserveRequests();
+            }}
+            >
+            <ScrollView disableScrollViewPanResponder={true} automaticallyAdjustKeyboardInsets={true}>
+              {reserveRequests.map((reserveRequest: object) => (
+                <Collapse key={reserveRequest._id}>
+                <CollapseHeader>
+                  <ListItem bottomDivider>
+                    <ListItem.Content>
+                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                      <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {reserveRequest.pickUpLocation}</Text></View>
+                      <View><Text style={{fontWeight: 'bold'}}>Dropoff: {reserveRequest.dropOffLocation}</Text></View>
+                    </ListItem.Title>
+                    </ListItem.Content>
+                  </ListItem>
+                </CollapseHeader>
+                  <CollapseBody>
+                    <ListItem key={reserveRequest._id} bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Subtitle>
+                          <Text>Reserve Details:</Text>
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                    </ListItem>
+                  </CollapseBody>
+                </Collapse>
+              ))}
+            </ScrollView>
+          </ListItem.Accordion>
+          <ListItem.Accordion
+            content= {
+              <>
+              <ListItem.Content>
+                <ListItem.Title>
+                  <Text style={{color: "black", fontSize: 30, marginTop: 5, marginBottom: 40, alignSelf:"center"}}>Driver Reserve Offers</Text>
+                </ListItem.Title>
+              </ListItem.Content>
+              </>
+            }
+            isExpanded={expandedAccordionReserveOffers}
+            onPress={() => {
+              setExpandedReserveOffers();
+            }}
+            >
+            <ScrollView disableScrollViewPanResponder={true} automaticallyAdjustKeyboardInsets={true}>
+              {reserveOffers.map((reserveOffer: object) => (
+                <Collapse key={reserveOffer._id}>
+                <CollapseHeader>
+                  <ListItem bottomDivider>
+                    <ListItem.Content>
+                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                      <View><Text style={{fontWeight: 'bold'}}> {reserveOffer} </Text></View>
+                    </ListItem.Title>
+                    </ListItem.Content>
+                  </ListItem>
+                </CollapseHeader>
+                  <CollapseBody>
+                    <ListItem key={reserveOffer._id} bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Subtitle>
+                          <Text>Driver Details:</Text>
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                    </ListItem>
+                  </CollapseBody>
+                </Collapse>
+              ))}
+            </ScrollView>
+          </ListItem.Accordion>
         </View>
       }
       </View>
-      <View>
-      {!toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 5,marginBottom: 40, alignSelf:"center"}}>Reserve Requests</Text>}
-      </View>
-      <View>
-      {toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>Driver Ride Offers</Text>}
-      </View>
-      <View>
-      {!toggleRideReserve && <Text style={{color: "black", fontSize: 30, marginTop: 40,marginBottom: 40, alignSelf:"center"}}>Driver Reserve Offers</Text>}
-      </View>
+    
     </View>
   );
 };
