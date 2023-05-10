@@ -117,6 +117,14 @@ const set_selection = () => {
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
               backgroundColor: "#4f284b", alignSelf: "center", marginTop: 20
               }}
+              onPress={() => navigation.navigate("DriverOffers")}
+              >
+                <Text style={{color: "white"}}> Requests, Offers </Text>
+                </TouchableOpacity>
+        <TouchableOpacity style={{ borderWidth : 1, height : 42, width: "80%"
+              , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
+              backgroundColor: "#4f284b", alignSelf: "center", marginTop: 20
+              }}
               onPress={()=>alert("App Information")}
               >
                 <Text style={{color: "white"}}> Information </Text>
