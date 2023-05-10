@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GooglePlacesSearchInput from "../../components/search/GooglePlacesSearchInput";
 import HomeOptions from "./HomeOptions";
@@ -117,7 +117,25 @@ const set_selection = () => {
               , justifyContent : "center", alignItems: "center", borderRadius: 40 ,
               backgroundColor: "#4f284b", alignSelf: "center", marginTop: 20
               }}
-              onPress={() => navigation.navigate("DriverOffers")}
+              onPress={() => {
+                Alert.alert('Requests, Offers',
+                  'Riding or Driving? ',
+                  [
+                      {
+                      text: 'Riding',
+                      onPress:() => {navigation.navigate("DriverOffers")}
+                    },
+                    {
+                      text: 'Driving', onPress: () => {navigation.navigate("RidersQueue")}
+                    },
+                    {
+                      text: 'Cancel',
+                      onPress:() => {return false;}
+                    },
+                  ]
+                  );      
+                }
+              }
               >
                 <Text style={{color: "white"}}> Requests, Offers </Text>
                 </TouchableOpacity>
