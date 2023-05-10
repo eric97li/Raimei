@@ -221,7 +221,7 @@ const DriverOffersScreen = () => {
                 <CollapseHeader>
                   <ListItem bottomDivider>
                     <ListItem.Content>
-                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                    <ListItem.Title> 
                       <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {rideRequest.pickUpLocation}</Text></View>
                       <View><Text style={{fontWeight: 'bold'}}>Dropoff: {rideRequest.dropOffLocation}</Text></View>
                     </ListItem.Title>
@@ -232,7 +232,12 @@ const DriverOffersScreen = () => {
                     <ListItem key={rideRequest._id} bottomDivider>
                       <ListItem.Content>
                         <ListItem.Subtitle>
-                          <Text>Ride Details:</Text>
+                          <View><Text>Ride Details {'->'} </Text></View>
+                          <View><Text>Selected Ride: {rideRequest.selectedRide}</Text></View>
+                          <View><Text>, Currency: {rideRequest.currency}</Text></View>
+                          <View><Text>, Price Request: {rideRequest.userPrice}</Text></View>
+                          <View><Text>, Estimated Travel Time: {rideRequest.dropOffTravelTime}</Text></View>
+                          <View><Text>, Estimated Travel Distance: {rideRequest.dropOffTravelDistance}</Text></View>
                         </ListItem.Subtitle>
                       </ListItem.Content>
                     </ListItem>
@@ -262,7 +267,7 @@ const DriverOffersScreen = () => {
                 <CollapseHeader>
                   <ListItem bottomDivider>
                     <ListItem.Content>
-                    <ListItem.Title style = {{ flexDirection: "column"}} >
+                    <ListItem.Title>
                       <View><Text style={{fontWeight: 'bold'}}> {rideOffer}</Text></View>
                     </ListItem.Title>
                     </ListItem.Content>
@@ -307,7 +312,7 @@ const DriverOffersScreen = () => {
                 <CollapseHeader>
                   <ListItem bottomDivider>
                     <ListItem.Content>
-                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                    <ListItem.Title> 
                       <View style={{marginBottom: 10}}><Text style={{fontWeight: 'bold'}}>Pickup: {reserveRequest.pickUpLocation}</Text></View>
                       <View><Text style={{fontWeight: 'bold'}}>Dropoff: {reserveRequest.dropOffLocation}</Text></View>
                     </ListItem.Title>
@@ -318,7 +323,13 @@ const DriverOffersScreen = () => {
                     <ListItem key={reserveRequest._id} bottomDivider>
                       <ListItem.Content>
                         <ListItem.Subtitle>
-                          <Text>Reserve Details:</Text>
+                        <View><Text>Reserve Details {'->'} </Text></View>
+                          <View><Text>Selected Ride: {reserveRequest.selectedRide}</Text></View>
+                          <View><Text>, Reserve Date: {reserveRequest.reserveDate}</Text></View>
+                          <View><Text>, Currency: {reserveRequest.currency}</Text></View>
+                          <View><Text>, Price Request: {reserveRequest.userPrice}</Text></View>
+                          <View><Text>, Estimated Travel Time: {reserveRequest.dropOffTravelTime}</Text></View>
+                          <View><Text>, Estimated Travel Distance: {reserveRequest.dropOffTravelDistance}</Text></View>
                         </ListItem.Subtitle>
                       </ListItem.Content>
                     </ListItem>
@@ -348,7 +359,7 @@ const DriverOffersScreen = () => {
                 <CollapseHeader>
                   <ListItem bottomDivider>
                     <ListItem.Content>
-                    <ListItem.Title style = {{ flexDirection: "column"}} > 
+                    <ListItem.Title> 
                       <View><Text style={{fontWeight: 'bold'}}> {reserveOffer} </Text></View>
                     </ListItem.Title>
                     </ListItem.Content>
