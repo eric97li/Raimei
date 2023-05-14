@@ -12,6 +12,10 @@ const SignInScreen = () => {
   const { setEmail } = useStore().commonStore;
   const { setPhone } = useStore().commonStore;
   const { setName } = useStore().commonStore;
+  const { setDriverRating } = useStore().commonStore;
+  const { setRiderRating } = useStore().commonStore;
+  const { setDriveCount } = useStore().commonStore;
+  const { setRideCount } = useStore().commonStore;
 
   const validate_field = (username: string, password: string) => {
 
@@ -160,6 +164,142 @@ const SignInScreen = () => {
                         // console.log(JSON.stringify(response.data));
 
                       setPhone(response.data.document.phone);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //Drive rating
+
+                let axiosDriveRating = require('axios');
+                let dataDriveRating = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configDriveRating = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataDriveRating
+                };
+
+                axiosDriveRating(configDriveRating)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setDriverRating(response.data.document.driverRating);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //Ride rating
+
+                let axiosRideRating = require('axios');
+                let dataRideRating = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configRideRating = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataRideRating
+                };
+
+                axiosRideRating(configRideRating)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setRiderRating(response.data.document.riderRating);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                //Drive count
+                let axiosDriveCount = require('axios');
+                let dataDriveCount = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configDriveCount = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataDriveCount
+                };
+
+                axiosDriveCount(configDriveCount)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setDriveCount(response.data.document.driveCount);
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
+                //Ride count
+
+                let axiosRideCount = require('axios');
+                let dataRideCount = JSON.stringify({
+                    "collection": "users",
+                    "database": "RaimeiDB",
+                    "dataSource": "Cluster0",
+                    "filter": {
+                      "username": username
+                    }
+                });
+
+                let configRideCount = {
+                    method: 'post',
+                    url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Request-Headers': '*',
+                      'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+                    },
+                    data: dataRideCount
+                };
+
+                axiosRideCount(configRideCount)
+                    .then(function (response) {
+                        // console.log(JSON.stringify(response.data));
+
+                      setRideCount(response.data.document.rideCount);
 
                     })
                     .catch(function (error) {

@@ -16,6 +16,10 @@ class CommonStore {
   driverLocation: string | null = null;
   info: string | null = null;
   updateInfo: string | null = null;
+  driverRating: string | null = null;
+  riderRating: string | null = null;
+  driveCount: string | null = null;
+  rideCount: string | null = null;
   currency: string | null = null;
   reserve: string | null = null;
   reserveDate: string | null = null;
@@ -90,6 +94,22 @@ class CommonStore {
   setUpdateInfo = (updateInfo: string) => {
     this.updateInfo = updateInfo;
   };
+
+  setDriverRating = (driverRating: string) => {
+    this.driverRating = driverRating;
+  }
+
+  setRiderRating = (riderRating: string) => {
+    this.riderRating = riderRating;
+  }
+
+  setDriveCount = (driveCount: string) => {
+    this.driveCount = driveCount;
+  }
+
+  setRideCount = (rideCount: string) => {
+    this.rideCount = rideCount;
+  }
 
   setReserve = (reserve: string) => {
     this.reserve = reserve;

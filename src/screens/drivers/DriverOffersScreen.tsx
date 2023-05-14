@@ -97,7 +97,7 @@ const DriverOffersScreen = () => {
               console.log(error);
           });
             
-          })();
+    })();
 
   }, 1000);
   return () => clearInterval(interval);
@@ -159,7 +159,7 @@ const DriverOffersScreen = () => {
               console.log(error);
           });
             
-          })();
+    })();
 
   }, 1000);
   return () => clearInterval(interval);

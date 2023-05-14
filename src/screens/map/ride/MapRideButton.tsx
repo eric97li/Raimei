@@ -15,6 +15,8 @@ const MapRideButton = () => {
   const { name, setName } = useStore().commonStore;
   const { email, setEmail } = useStore().commonStore;
   const { phone, setPhone } = useStore().commonStore;
+  const { riderRating, setRiderRating } = useStore().commonStore;
+  const { rideCount, setRideCount } = useStore().commonStore;
 
   const { reserve } = useStore().commonStore;
   const { reserveDate } = useStore().commonStore;
@@ -151,6 +153,71 @@ const MapRideButton = () => {
                 console.log(error);
             });
 
+        // Get Rider Rating
+        let data4 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config4 = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data4
+      };
+
+      axios(config4)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data));
+        
+            setRiderRating(response.data.document.riderRating);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
+
+        // Get Ride Count
+        let data5 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config5 = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data5
+      };
+
+      axios(config5)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data));
+        
+            setRideCount(response.data.document.rideCount);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
         //Build Ride Request and insert to data store
 
         let axiosRideRequest = require('axios');
@@ -163,6 +230,8 @@ const MapRideButton = () => {
             "email": email,
             "phone": phone,
             "username": username,
+            "riderRating": riderRating,
+            "rideCount": rideCount,
             "pickUpLocation": origin?.description,
             "dropOffLocation": destination?.description,
             "selectedRide": selectedRide?.title,
@@ -299,6 +368,71 @@ const MapRideButton = () => {
                 console.log(error);
             });
 
+         // Get Rider Rating
+         let data4 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config4 = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data4
+      };
+
+      axios(config4)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data));
+        
+            setRiderRating(response.data.document.riderRating);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
+
+        // Get Ride Count
+        let data5 = JSON.stringify({
+          "collection": "users",
+          "database": "RaimeiDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "username": username
+          }
+      });
+
+      let config5 = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-mqybs/endpoint/data/v1/action/findOne',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'OuzpXWsAyFyncl3mEd4e19fXdXIzni6qi7KlcBzsKclyLAycPefVCE3iJe3om1I4',
+          },
+          data: data5
+      };
+
+      axios(config5)
+          .then(function (response) {
+              // console.log(JSON.stringify(response.data));
+        
+            setRideCount(response.data.document.rideCount);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
         let axiosRideRequest = require('axios');
         let data = JSON.stringify({
           "collection": "reservesQueue",
@@ -309,6 +443,8 @@ const MapRideButton = () => {
             "email": email,
             "phone": phone,
             "username": username,
+            "riderRating": riderRating,
+            "rideCount": rideCount,
             "pickUpLocation": origin?.description,
             "dropOffLocation": destination?.description,
             "selectedRide": selectedRide?.title,
