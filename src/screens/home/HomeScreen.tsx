@@ -126,7 +126,7 @@ const set_selection = () => {
                       onPress:() => {navigation.navigate("DriverOffers")}
                     },
                     {
-                      text: 'Driving', onPress: () => {navigation.navigate("RidersQueue")}
+                      text: 'Driving', onPress: () => {navigation.navigate("SetDriverInfo")}
                     },
                     {
                       text: 'Cancel',

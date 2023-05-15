@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { Keyboard, TouchableWithoutFeedback, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { Icon, Text } from "react-native-elements";
 import { RootNavigationProp } from "../../types/navigation";
 import * as Location from "expo-location";
@@ -178,6 +178,8 @@ const SetDriverInfoScreen = () => {
       >
         <Icon name="menu" />
       </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
+      <View>
       <Text style={{color: "black", fontSize: 50, marginTop: 100,marginBottom: 40, alignSelf:"center"}}>Set Driver Info</Text>
       { (location) == null &&
         <Text style={{alignSelf:"center"}}>{errorMsg}</Text>
@@ -209,6 +211,8 @@ const SetDriverInfoScreen = () => {
             </View>
         </View>
       }
+      </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
