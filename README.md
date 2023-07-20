@@ -1,7 +1,7 @@
 # Raimei
 Raimei, a ride-sharing service idea by Raimei Technologies, Founded by Eric Li
 
--Market driven price, rider and driver price negotiation rideshare
+-Market driven price, rider and driver price negotiation rideshare, drive and ride all in one app
 
 | Login Page                            | Signup Page                           | Home Page                                     |
 | ----------------------------------- | ----------------------------------- | ------------------------------------------- |
