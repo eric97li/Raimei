@@ -22,4 +22,6 @@ Create a billing account in Google Cloud API console and add Places, Directions,
 
 Create an API key edit the .env.local file's value for GOOGLE_MAPS_API_KEY
 
+Provide the "let linkString3 = 'key= ' " (line 126 in SetDriverInfoScreen.tsx) with the GOOGLE_MAPS_API_KEY value as well
+
 Download Expo Go from either Google Play or Apple Store to run the app on your phone.
